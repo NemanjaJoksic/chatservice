@@ -1,0 +1,61 @@
+plugins {
+    id 'play'
+    id 'idea'
+}
+
+def playVersion = "2.6.21"
+def scalaVersion = System.getProperty("scala.binary.version", /* default = */ "2.11")
+def akkaVersion = "2.5.19"
+
+model {
+    components {
+        play {
+            platform play: playVersion, scala: scalaVersion, java: '1.8'
+            injectedRoutesGenerator = true
+
+            sources {
+                twirlTemplates {
+                    defaultImports = TwirlImports.JAVA
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    play "com.typesafe.play:play-guice_$scalaVersion:$playVersion"
+    play "com.typesafe.play:play-logback_$scalaVersion:$playVersion"
+    play "com.typesafe.play:play_$scalaVersion:$playVersion"
+    play "com.typesafe.play:play-netty-server_$scalaVersion:$playVersion"
+    play "com.typesafe.play:play-java_$scalaVersion:$playVersion"
+    play "com.typesafe.play:routes-compiler_$scalaVersion:$playVersion"
+
+    play "com.typesafe.akka:akka-actor_$scalaVersion:$akkaVersion"
+    play "com.typesafe.akka:akka-remote_$scalaVersion:$akkaVersion"
+    play "com.typesafe.akka:akka-cluster-metrics_$scalaVersion:$akkaVersion"
+    play "com.typesafe.akka:akka-cluster-tools_$scalaVersion:$akkaVersion"
+
+    play "com.lightbend.play:play-spring-loader_$scalaVersion:0.0.2"
+
+    play "com.lightbend.play:play-spring-loader_$scalaVersion:0.0.2"
+
+    play 'org.springframework.boot:spring-boot-autoconfigure:2.1.2.RELEASE'
+
+    play 'com.google.protobuf:protobuf-java:3.6.1'
+
+    playTest "org.assertj:assertj-core:3.6.2"
+    playTest "org.awaitility:awaitility:2.0.0"
+}
+
+repositories {
+    jcenter()
+    maven {
+        name "lightbend-maven-releases"
+        url "https://repo.lightbend.com/lightbend/maven-release"
+    }
+    ivy {
+        name "lightbend-ivy-release"
+        url "https://repo.lightbend.com/lightbend/ivy-releases"
+        layout "ivy"
+    }
+}

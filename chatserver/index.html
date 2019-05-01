@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Socket</title>
+
+    <style type="text/css">
+      #chat {
+        width: 500px;
+        height: 1000px;
+        border: 1px solid black;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .sent {
+        text-align: left;
+        width: 300px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        float: left;
+      }
+
+      .sent span {
+        color: green;
+        font-size: 20px;
+        word-break: break-all;
+      }
+
+      .received span {
+        color: blue;
+        font-size: 20px;
+        word-break: break-all;
+      }
+
+      .received {
+        text-align: right;
+        width: 300px;
+        float: right;
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div>
+      <input id="socket-url" type="text" placeholder="Enter connection url">
+      <button id="socket-connection-button" type="button" onclick="connect()">Connect</button>
+    </div>
+
+    <div>
+      <input id="message" type="text" placeholder="Enter message">
+      <input id="receiver" type="text" placeholder="Enter receiver id">
+      <button id="send-button" type="button" onclick="send()">Send</button>
+    </div>
+
+    Chat:
+    <div id="chat"></div>
+
+
+    <script>
+      var sock = null;
+
+      connect = function() {
+        sock = new WebSocket(document.getElementById("socket-url").value);
+
+        sock.onopen = function(event) {
+          alert('Socket connected successfully');
+        }
+
+        sock.onmessage = function(event) {
+          var obj = JSON.parse(event.data)
+
+          document.getElementById("chat").innerHTML += '<div class="received"><span>' + obj.message + '(' + obj.receiver + ')' + '</span></div>'
+        }
+      }
+
+      send = function() {
+        var msg = document.getElementById("message").value;
+        var rec = document.getElementById("receiver").value;
+
+        sock.send(`{ "receiver": "${rec}", "message": "${msg}" }`);
+
+        chat = document.getElementById("chat");
+
+        document.getElementById("chat").innerHTML += '<div class="sent"><span>' + msg + '</span></div>'
+      }
+    </script>
+  </body>
+</html>
