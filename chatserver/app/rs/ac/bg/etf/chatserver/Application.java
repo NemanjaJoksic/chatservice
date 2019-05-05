@@ -9,9 +9,6 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.DeadLetter;
 import akka.cluster.Cluster;
-import akka.cluster.pubsub.DistributedPubSub;
-import akka.cluster.pubsub.DistributedPubSubMediator;
-import java.util.Arrays;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import static rs.ac.bg.etf.chatserver.Consts.TOPIC_ACTOR;
-import rs.ac.bg.etf.chatserver.actor.SubscriberActor;
 import rs.ac.bg.etf.chatserver.actor.DeadLetterActor;
 import rs.ac.bg.etf.chatserver.actor.storage.MessageHandlerActorStorage;
 
@@ -45,7 +40,6 @@ public class Application {
     public void init() {
         joinSeedNodes();
         createDeadLetterActor();
-        createSubscriberActor();
     }
     
     private void createDeadLetterActor() {
@@ -58,13 +52,5 @@ public class Application {
         Cluster cluster = Cluster.get(actorSystem);
 //        cluster.joinSeedNodes(Arrays.asList(actorSystem.provider().getDefaultAddress()));
     }
-
-    private void createSubscriberActor() {
-        ActorRef subscriber = actorSystem.actorOf(SubscriberActor.props(actorStorage));
-        ActorRef mediator = DistributedPubSub.get(actorSystem).mediator();
-        mediator.tell(new DistributedPubSubMediator.Subscribe(TOPIC_ACTOR, subscriber),
-                subscriber);
-        logger.info("Subscriber created");
-        
-    }
+    
 }

@@ -18,7 +18,6 @@ import rs.ac.bg.etf.chatserver.actor.serializer.MessageSerializer;
 import rs.ac.bg.etf.chatserver.actor.serializer.OutputSerializer;
 import rs.ac.bg.etf.chatserver.actor.storage.MessageHandlerActorStorage;
 import rs.ac.bg.etf.chatserver.model.Messages;
-import rs.ac.bg.etf.chatserver.actor.service.NotificationService;
 import rs.ac.bg.etf.chatserver.executor.ActorHandlerExecutionContext;
 
 /**
@@ -34,22 +33,19 @@ public abstract class MessageHandlerActor extends AbstractActor {
     protected final MessageHandlerActorStorage actorStorage;
     protected final MessageSerializer messageSerializer;
     protected final OutputSerializer outputSerializer;
-    protected final NotificationService notificationService;
     protected final String id;
     protected final String akkaActorRemoteAddress;
     protected final ActorHandlerExecutionContext executionContext;
 
     public MessageHandlerActor(ActorSystem actorSystem, Config config,
             MessageHandlerActorStorage actorStorage, MessageSerializer messageSerializer,
-            OutputSerializer outputSerializer, NotificationService notificationService, 
-            String id)
+            OutputSerializer outputSerializer, String id)
             throws UnknownHostException {
         this.actorSystem = actorSystem;
         this.config = config;
         this.actorStorage = actorStorage;
         this.messageSerializer = messageSerializer;
         this.outputSerializer = outputSerializer;
-        this.notificationService = notificationService;
         this.id = id;
         this.akkaActorRemoteAddress = Serialization.serializedActorPath(getSelf());
         this.executionContext = new ActorHandlerExecutionContext(actorSystem);
@@ -58,7 +54,7 @@ public abstract class MessageHandlerActor extends AbstractActor {
     @Override
     public void preStart() throws Exception {
         super.preStart();
-        notificationService.actorStarted(id, akkaActorRemoteAddress);
+        actorStorage.put(id, akkaActorRemoteAddress);
     }
 
     @Override

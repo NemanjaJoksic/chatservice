@@ -32,7 +32,6 @@ import rs.ac.bg.etf.chatserver.actor.storage.MessageHandlerActorStorage;
 import rs.ac.bg.etf.chatserver.executor.WebsocketExecutionContext;
 import rs.ac.bg.etf.chatserver.model.TokenDetails;
 import rs.ac.bg.etf.chatserver.service.ChatService;
-import rs.ac.bg.etf.chatserver.actor.service.NotificationService;
 import rs.ac.bg.etf.chatserver.exception.ChatServerException;
 import rs.ac.bg.etf.chatserver.exception.ExceptionData;
 import rs.ac.bg.etf.chatserver.token.auth.TokenAuthenticator;
@@ -61,9 +60,6 @@ public class ChatServiceImpl implements ChatService {
     @Autowired
     private MessageHandlerActorStorage actorStorage;
 
-    @Autowired
-    private NotificationService notificationService;
-
     private Materializer materializer;
     private WebsocketExecutionContext executionContext;
 
@@ -88,7 +84,7 @@ public class ChatServiceImpl implements ChatService {
                 Function<ActorRef, Props> func = (actor)
                         -> PersonalChatMessageHandlerActor.props(actor, actorSystem,
                                 config, actorStorage, messageSerializer, outputSerializer,
-                                notificationService, details.getChannel());
+                                details.getChannel());
 
                 return F.Either.Right(ActorFlow.actorRef(
                         func,

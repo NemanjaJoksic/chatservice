@@ -18,7 +18,6 @@ import rs.ac.bg.etf.chatserver.actor.serializer.MessageSerializer;
 import rs.ac.bg.etf.chatserver.actor.serializer.OutputSerializer;
 import rs.ac.bg.etf.chatserver.actor.storage.MessageHandlerActorStorage;
 import rs.ac.bg.etf.chatserver.model.Messages;
-import rs.ac.bg.etf.chatserver.actor.service.NotificationService;
 import static rs.ac.bg.etf.chatserver.Consts.ACTOR_DISPATCHER;
 
 /**
@@ -29,11 +28,9 @@ public class PersonalChatMessageHandlerActor extends MessageHandlerActor {
 
     public static Props props(ActorRef out, ActorSystem actorSystem, Config config,
             MessageHandlerActorStorage actorStorage, MessageSerializer messageSerializer,
-            OutputSerializer outputSerializer, NotificationService notificationService,
-            String channel) {
+            OutputSerializer outputSerializer, String channel) {
         return Props.create(PersonalChatMessageHandlerActor.class, out, actorSystem, config,
-                actorStorage, messageSerializer, outputSerializer, notificationService,
-                channel).withDispatcher(ACTOR_DISPATCHER);
+                actorStorage, messageSerializer, outputSerializer, channel).withDispatcher(ACTOR_DISPATCHER);
     }
 
     private static final Logger logger = LoggerFactory.getLogger(MessageHandlerActor.class);
@@ -42,9 +39,8 @@ public class PersonalChatMessageHandlerActor extends MessageHandlerActor {
 
     public PersonalChatMessageHandlerActor(ActorRef out, ActorSystem actorSystem, Config config,
             MessageHandlerActorStorage actorStorage, MessageSerializer messageSerializer,
-            OutputSerializer outputSerializer, NotificationService notificationService,
-            String channel) throws UnknownHostException {
-        super(actorSystem, config, actorStorage, messageSerializer, outputSerializer, notificationService, channel);
+            OutputSerializer outputSerializer, String channel) throws UnknownHostException {
+        super(actorSystem, config, actorStorage, messageSerializer, outputSerializer, channel);
 
         this.out = out;
 
@@ -95,7 +91,6 @@ public class PersonalChatMessageHandlerActor extends MessageHandlerActor {
     @Override
     protected void disconnect(Terminated message) {
         actorStorage.remove(id);
-        notificationService.actorStopped(id);
         logger.info("User [{}] has disconnected", id);
     }
 }
