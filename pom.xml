@@ -22,6 +22,7 @@
 
     <modules>
         <module>chatserver</module>
+        <module>chatmanager</module>
         <module>security</module>
         <module>shared</module>
     </modules>

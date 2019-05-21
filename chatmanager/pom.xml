@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!--<groupId>rs.ac.bg.etf.chatservice</groupId>-->
-    <artifactId>security</artifactId>
+    <artifactId>chatmanager</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <packaging>play2</packaging>
     
     <parent>
         <groupId>rs.ac.bg.etf</groupId>
@@ -13,7 +13,7 @@
         <relativePath>..</relativePath>
     </parent>
     
-    <name>security</name>
+    <name>chatmanager</name>
 
     <dependencies>
         <dependency>
@@ -22,6 +22,12 @@
             <version>${project.version}</version>
         </dependency>
         
+        <dependency>
+            <groupId>rs.ac.bg.etf</groupId>
+            <artifactId>security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
@@ -32,6 +38,24 @@
             <groupId>com.typesafe.play</groupId>
             <artifactId>play_${scala.play.version}</artifactId>
             <version>${play2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>routes-compiler_${scala.play.version}</artifactId>
+            <version>${play2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_${scala.play.version}</artifactId>
+            <version>${akka.version}</version>
+        </dependency>
+        
+        <!-- required for: "run", "start" and "dist" -->
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play-netty-server_${scala.play.version}</artifactId>
+            <version>${play2.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- default SLF4J logging implementation, can be replaced by other -->
@@ -76,6 +100,20 @@
             </resource>
         </resources>
 
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.play2-maven-plugin</groupId>
+                <artifactId>play2-maven-plugin</artifactId>
+                <version>1.0.0-rc5</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <!-- if using controllers without dependency injection; default value is "injected" -->
+                    <routesGenerator>injected</routesGenerator>
+                    <mainLang>java</mainLang>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+    
 </project>
     
