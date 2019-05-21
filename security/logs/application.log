@@ -1,0 +1,20 @@
+2019-05-20 17:02:06,796 [WARN] from application in netty-event-loop-3 - application.conf @ file:/C:/Users/joksin/Downloads/play-java-maven/target/classes/application.conf: 55: play.crypto.secret is deprecated, use play.http.secret.key instead
+2019-05-20 17:02:06,896 [WARN] from application in netty-event-loop-3 - Using the following cache for assets configuration:
+	 enabledCaching = false
+	 enabledCacheControl = false
+	 defaultCacheControl = public, max-age=3600
+	 aggressiveCacheControl = public, max-age=31536000, immutable
+	 configuredCacheControl:
+
+
+2019-05-20 17:02:07,096 [WARN] from akka.util.ManifestInfo in application-akka.actor.default-dispatcher-2 - Detected possible incompatible versions on the classpath. Please note that a given Akka version MUST be the same across all modules of Akka that you are using, e.g. if you use [2.5.19] all other modules that are released together MUST be of the same version. Make sure you're using a compatible set of libraries. Possibly conflicting versions [2.5.19, 2.5.8] in libraries [akka-cluster-metrics:2.5.19, akka-protobuf:2.5.19, akka-actor:2.5.19, akka-slf4j:2.5.8, akka-remote:2.5.19, akka-cluster:2.5.19, akka-stream:2.5.19, akka-cluster-tools:2.5.19]
+2019-05-20 17:02:07,430 [INFO] from play.api.http.EnabledFilters in netty-event-loop-3 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    rest.security.SecurityFilter
+
+2019-05-20 17:02:07,486 [INFO] from play.api.http.EnabledFilters in netty-event-loop-3 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    rest.security.SecurityFilter
+
+2019-05-20 17:02:07,615 [INFO] from play.api.Play in netty-event-loop-3 - Application started (Dev)
+2019-05-20 17:02:07,620 [WARN] from application in netty-event-loop-3 - application.conf @ file:/C:/Users/joksin/Downloads/play-java-maven/target/classes/application.conf: 55: play.crypto.secret is deprecated, use play.http.secret.key instead

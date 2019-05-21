@@ -7,13 +7,31 @@
     <artifactId>chatservice</artifactId>
     <version>0.1.0</version>
     <packaging>pom</packaging>
-
-    <modules>
-        <module>chatserver</module>
-    </modules>
-
+    
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <scala.play.version>2.11</scala.play.version>
+        <play2.version>2.6.9</play2.version>
+        <scala.version>2.11.8</scala.version>
+        <akka.version>2.5.19</akka.version>
+        <jar.plugin.version>2.6</jar.plugin.version>
         <spring.boot.version>2.1.3.RELEASE</spring.boot.version>
     </properties>
 
+    <modules>
+        <module>chatserver</module>
+        <module>security</module>
+        <module>shared</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
