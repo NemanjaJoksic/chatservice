@@ -24,6 +24,7 @@ import rs.ac.bg.etf.chatservice.chatserver.actor.storage.MessageHandlerActorStor
  * @author joksin
  */
 @ComponentScan
+//@ComponentScan(basePackages = "rs.ac.bg.etf.chatservice")
 @Configuration
 @PropertySource("classpath:application.conf")
 public class Application {

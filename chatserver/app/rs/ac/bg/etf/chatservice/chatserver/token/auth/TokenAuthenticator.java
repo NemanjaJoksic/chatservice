@@ -5,8 +5,8 @@
  */
 package rs.ac.bg.etf.chatservice.chatserver.token.auth;
 
-import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
 import rs.ac.bg.etf.chatservice.chatserver.model.TokenDetails;
+import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 
 /**
  *
@@ -14,6 +14,6 @@ import rs.ac.bg.etf.chatservice.chatserver.model.TokenDetails;
  */
 public interface TokenAuthenticator {
     
-    public TokenDetails validateToken(String token) throws ChatServerException;
+    public TokenDetails validateToken(String token) throws ChatServiceException;
     
 }

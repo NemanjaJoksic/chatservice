@@ -22,10 +22,10 @@ import org.springframework.stereotype.Component;
  *
  * @author joksin
  */
-@Component
+//@Component
 public class ErrorHandler extends DefaultHttpErrorHandler {
 
-    @Autowired
+//    @Autowired
     public ErrorHandler(Config config, Environment environment,
                         OptionalSourceMapper sourceMapper, Provider<Router> routes) {
         super(config, environment, sourceMapper, routes);

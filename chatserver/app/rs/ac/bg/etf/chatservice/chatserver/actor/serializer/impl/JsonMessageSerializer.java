@@ -11,8 +11,8 @@ import java.io.IOException;
 import org.springframework.stereotype.Component;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.JSON_SERIALIZATION;
 import rs.ac.bg.etf.chatservice.chatserver.actor.serializer.MessageSerializer;
-import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
 import rs.ac.bg.etf.chatservice.chatserver.model.Messages;
+import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 
 /**
  *
@@ -24,20 +24,20 @@ public class JsonMessageSerializer implements MessageSerializer {
     private final ObjectMapper mapper = new ObjectMapper();
     
     @Override
-    public byte[] serialize(Messages.ChatMessage message) throws ChatServerException {
+    public byte[] serialize(Messages.ChatMessage message) throws ChatServiceException {
         try {
             return mapper.writeValueAsBytes(message);
         } catch (JsonProcessingException ex) {
-            throw ChatServerException.generateException(ex);
+            throw ChatServiceException.generateException(ex);
         }
     }
 
     @Override
-    public Messages.ChatMessage deserialize(byte[] bytes) throws ChatServerException {
+    public Messages.ChatMessage deserialize(byte[] bytes) throws ChatServiceException {
         try {
             return mapper.readValue(bytes, Messages.ChatMessage.class);
         } catch (IOException ex) {
-            throw ChatServerException.generateException(ex);
+            throw ChatServiceException.generateException(ex);
         }
     }
     

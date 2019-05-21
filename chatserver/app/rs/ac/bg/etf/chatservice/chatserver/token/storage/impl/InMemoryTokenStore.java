@@ -43,7 +43,6 @@ public class InMemoryTokenStore implements TokenStore {
     
     @Override
     public void put(String ticket, TokenDetails details) {
-        map.put(ticket, details);
     }
     
     @Override
@@ -53,7 +52,6 @@ public class InMemoryTokenStore implements TokenStore {
 
     @Override
     public void remove(String ticket) {
-        map.remove(ticket);
     }
     
 }

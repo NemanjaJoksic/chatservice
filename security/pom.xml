@@ -4,7 +4,7 @@
     <!--<groupId>rs.ac.bg.etf.chatservice</groupId>-->
     <artifactId>security</artifactId>
     <version>1.0</version>
-    <packaging>play2</packaging>
+    <packaging>jar</packaging>
     
     <parent>
         <groupId>rs.ac.bg.etf</groupId>
@@ -91,19 +91,6 @@
             </resource>
         </resources>
 
-        <plugins>
-            <plugin>
-                <groupId>com.google.code.play2-maven-plugin</groupId>
-                <artifactId>play2-maven-plugin</artifactId>
-                <version>1.0.0-rc5</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <!-- if using controllers without dependency injection; default value is "injected" -->
-                    <routesGenerator>injected</routesGenerator>
-                    <mainLang>java</mainLang>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
 </project>
     

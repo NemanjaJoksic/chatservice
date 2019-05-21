@@ -5,8 +5,8 @@
  */
 package rs.ac.bg.etf.chatservice.chatserver.actor.serializer;
 
-import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
 import rs.ac.bg.etf.chatservice.chatserver.model.Messages;
+import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 
 /**
  *
@@ -14,8 +14,8 @@ import rs.ac.bg.etf.chatservice.chatserver.model.Messages;
  */
 public interface MessageSerializer {
     
-    public byte[] serialize(Messages.ChatMessage message) throws ChatServerException;
+    public byte[] serialize(Messages.ChatMessage message) throws ChatServiceException;
     
-    public Messages.ChatMessage deserialize(byte[] bytes) throws ChatServerException;
+    public Messages.ChatMessage deserialize(byte[] bytes) throws ChatServiceException;
     
 }

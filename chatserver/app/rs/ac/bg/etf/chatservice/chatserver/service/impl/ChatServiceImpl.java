@@ -32,9 +32,9 @@ import rs.ac.bg.etf.chatservice.chatserver.actor.storage.MessageHandlerActorStor
 import rs.ac.bg.etf.chatservice.chatserver.executor.WebsocketExecutionContext;
 import rs.ac.bg.etf.chatservice.chatserver.model.TokenDetails;
 import rs.ac.bg.etf.chatservice.chatserver.service.ChatService;
-import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
-import rs.ac.bg.etf.chatservice.chatserver.exception.ExceptionData;
 import rs.ac.bg.etf.chatservice.chatserver.token.auth.TokenAuthenticator;
+import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
+import rs.ac.bg.etf.chatservice.shared.exception.ExceptionData;
 
 /**
  *
@@ -91,7 +91,7 @@ public class ChatServiceImpl implements ChatService {
                         actorSystem,
                         materializer));
             } catch (BeansException ex) {
-                throw ChatServerException.generateException(ExceptionData.INVALID_MESSAGE_TYPE,
+                throw ChatServiceException.generateException(ExceptionData.INVALID_MESSAGE_TYPE,
                         Arrays.asList(messageType));
             }
         }, executionContext);

@@ -12,8 +12,8 @@ import play.mvc.*;
 import rs.ac.bg.etf.chatservice.chatserver.service.ChatService;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.TEXT_DATA;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.BINARY_DATA;
-import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
-import rs.ac.bg.etf.chatservice.chatserver.exception.ExceptionData;
+import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
+import rs.ac.bg.etf.chatservice.shared.exception.ExceptionData;
 
 /**
  *
@@ -25,7 +25,7 @@ public class ChatController {
     @Autowired
     private ChatService chatService;
 
-    public WebSocket chat(String dataType, String messageType, String ticket) throws ChatServerException {
+    public WebSocket chat(String dataType, String messageType, String ticket) throws ChatServiceException {
 
         switch (dataType) {
             case TEXT_DATA:
@@ -37,7 +37,7 @@ public class ChatController {
                     return chatService.openConnection(dataType, messageType, ticket);
                 });
             default:
-                throw ChatServerException.generateException(ExceptionData.INVALID_DATA_TYPE, 
+                throw ChatServiceException.generateException(ExceptionData.INVALID_DATA_TYPE, 
                         Arrays.asList(dataType));
         }
     }
