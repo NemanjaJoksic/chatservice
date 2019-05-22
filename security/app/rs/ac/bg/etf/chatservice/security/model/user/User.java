@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.etf.chatservice.security.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Collections;
 import java.util.List;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authority;
@@ -13,11 +14,16 @@ import rs.ac.bg.etf.chatservice.security.model.authentication.Authority;
  *
  * @author joksin
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements UserDetails {
 
     private String username;
     private String password;
     private List<? extends Authority> authorities;
+    
+    public User() {
+        
+    }
 
     public User(String username, String password) {
         this.username = username;

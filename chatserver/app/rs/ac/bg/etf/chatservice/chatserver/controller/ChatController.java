@@ -25,16 +25,16 @@ public class ChatController {
     @Autowired
     private ChatService chatService;
 
-    public WebSocket chat(String dataType, String messageType, String ticket) throws ChatServiceException {
+    public WebSocket chat(String dataType, String messageType, String token) throws ChatServiceException {
 
         switch (dataType) {
             case TEXT_DATA:
                 return WebSocket.Text.acceptOrResult(request -> {
-                    return chatService.openConnection(dataType, messageType, ticket);
+                    return chatService.openConnection(dataType, messageType, token);
                 });
             case BINARY_DATA:
                 return WebSocket.Binary.acceptOrResult(request -> {
-                    return chatService.openConnection(dataType, messageType, ticket);
+                    return chatService.openConnection(dataType, messageType, token);
                 });
             default:
                 throw ChatServiceException.generateException(ExceptionData.INVALID_DATA_TYPE, 

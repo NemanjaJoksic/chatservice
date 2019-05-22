@@ -1,2 +1,3 @@
 
 GET     /user                   rs.ac.bg.etf.chatservice.chatmanager.controller.TestController.user()
+GET     /chat/connect           rs.ac.bg.etf.chatservice.chatmanager.controller.ChatController.connect(dataType: String, messageType: String)

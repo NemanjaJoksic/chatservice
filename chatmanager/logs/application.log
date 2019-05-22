@@ -1,13 +1,13 @@
-2019-05-21 16:26:01,692 [WARN] from akka.util.ManifestInfo in application-akka.actor.default-dispatcher-9 - Detected possible incompatible versions on the classpath. Please note that a given Akka version MUST be the same across all modules of Akka that you are using, e.g. if you use [2.5.19] all other modules that are released together MUST be of the same version. Make sure you're using a compatible set of libraries. Possibly conflicting versions [2.5.19, 2.5.8] in libraries [akka-actor:2.5.19, akka-slf4j:2.5.8, akka-stream:2.5.8]
-2019-05-21 16:26:02,022 [INFO] from play.api.http.EnabledFilters in netty-event-loop-2 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2019-05-22 09:40:40,232 [WARN] from akka.util.ManifestInfo in application-akka.actor.default-dispatcher-2 - Detected possible incompatible versions on the classpath. Please note that a given Akka version MUST be the same across all modules of Akka that you are using, e.g. if you use [2.5.19] all other modules that are released together MUST be of the same version. Make sure you're using a compatible set of libraries. Possibly conflicting versions [2.5.19, 2.5.8] in libraries [akka-actor:2.5.19, akka-slf4j:2.5.8, akka-stream:2.5.8]
+2019-05-22 09:40:40,654 [INFO] from play.api.http.EnabledFilters in netty-event-loop-3 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     rs.ac.bg.etf.chatservice.security.filter.SecurityFilter
 
-2019-05-21 16:26:02,106 [INFO] from play.api.http.EnabledFilters in netty-event-loop-2 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2019-05-22 09:40:40,694 [INFO] from play.api.http.EnabledFilters in netty-event-loop-3 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     rs.ac.bg.etf.chatservice.security.filter.SecurityFilter
 
-2019-05-21 16:26:02,200 [WARN] from application in netty-event-loop-2 - Using the following cache for assets configuration:
+2019-05-22 09:40:40,731 [WARN] from application in netty-event-loop-3 - Using the following cache for assets configuration:
 	 enabledCaching = false
 	 enabledCacheControl = false
 	 defaultCacheControl = public, max-age=3600
@@ -15,56 +15,4 @@
 	 configuredCacheControl:
 
 
-2019-05-21 16:26:02,393 [INFO] from play.api.Play in netty-event-loop-2 - Application started (Dev)
-2019-05-21 16:26:02,524 [ERROR] from rs.ac.bg.etf.chatservice.shared.exception.ExceptionToResultConverter in application-akka.actor.default-dispatcher-8 - Missing authorization header
-rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException: Missing authorization header
-	at rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException.generateException(ChatServiceException.java:34)
-	at rs.ac.bg.etf.chatservice.security.provider.BasicAuthenticationProvider.lambda$authenticate$0(BasicAuthenticationProvider.java:38)
-	at java.util.Optional.orElseThrow(Optional.java:290)
-	at rs.ac.bg.etf.chatservice.security.provider.BasicAuthenticationProvider.authenticate(BasicAuthenticationProvider.java:38)
-	at rs.ac.bg.etf.chatservice.security.provider.AuthenticationProviderManager.authenticate(AuthenticationProviderManager.java:36)
-	at rs.ac.bg.etf.chatservice.security.filter.SecurityFilter.apply(SecurityFilter.java:47)
-	at play.mvc.Filter$1.apply(Filter.java:39)
-	at play.api.mvc.Filter$$anon$1.apply(Filters.scala:61)
-	at play.api.mvc.Filter$$anon$1.apply(Filters.scala:48)
-	at play.api.mvc.EssentialAction$$anon$1.apply(Action.scala:37)
-	at play.api.mvc.EssentialAction$$anon$1.apply(Action.scala:32)
-	at play.core.server.netty.PlayRequestHandler$$anonfun$1.apply(PlayRequestHandler.scala:114)
-	at play.core.server.netty.PlayRequestHandler$$anonfun$1.apply(PlayRequestHandler.scala:112)
-	at play.api.mvc.EssentialAction$$anon$3.apply(Action.scala:48)
-	at play.api.mvc.EssentialAction$$anon$3.apply(Action.scala:47)
-	at play.core.server.netty.PlayRequestHandler$$anonfun$play$core$server$netty$PlayRequestHandler$$handleAction$1.apply(PlayRequestHandler.scala:274)
-	at play.core.server.netty.PlayRequestHandler$$anonfun$play$core$server$netty$PlayRequestHandler$$handleAction$1.apply(PlayRequestHandler.scala:274)
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:44)
-	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
-	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
-	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
-	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
-2019-05-21 16:26:30,943 [ERROR] from rs.ac.bg.etf.chatservice.shared.exception.ExceptionToResultConverter in application-akka.actor.default-dispatcher-3 - Wrong password
-rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException: Wrong password
-	at rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException.generateException(ChatServiceException.java:34)
-	at rs.ac.bg.etf.chatservice.security.provider.BasicAuthenticationProvider.authenticate(BasicAuthenticationProvider.java:45)
-	at rs.ac.bg.etf.chatservice.security.provider.AuthenticationProviderManager.authenticate(AuthenticationProviderManager.java:36)
-	at rs.ac.bg.etf.chatservice.security.filter.SecurityFilter.apply(SecurityFilter.java:47)
-	at play.mvc.Filter$1.apply(Filter.java:39)
-	at play.api.mvc.Filter$$anon$1.apply(Filters.scala:61)
-	at play.api.mvc.Filter$$anon$1.apply(Filters.scala:48)
-	at play.api.mvc.EssentialAction$$anon$1.apply(Action.scala:37)
-	at play.api.mvc.EssentialAction$$anon$1.apply(Action.scala:32)
-	at play.core.server.netty.PlayRequestHandler$$anonfun$1.apply(PlayRequestHandler.scala:114)
-	at play.core.server.netty.PlayRequestHandler$$anonfun$1.apply(PlayRequestHandler.scala:112)
-	at play.api.mvc.EssentialAction$$anon$3.apply(Action.scala:48)
-	at play.api.mvc.EssentialAction$$anon$3.apply(Action.scala:47)
-	at play.core.server.netty.PlayRequestHandler$$anonfun$play$core$server$netty$PlayRequestHandler$$handleAction$1.apply(PlayRequestHandler.scala:274)
-	at play.core.server.netty.PlayRequestHandler$$anonfun$play$core$server$netty$PlayRequestHandler$$handleAction$1.apply(PlayRequestHandler.scala:274)
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
-	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
-	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
-	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:44)
-	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
-	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
-	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
-	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2019-05-22 09:40:40,879 [INFO] from play.api.Play in netty-event-loop-3 - Application started (Dev)
