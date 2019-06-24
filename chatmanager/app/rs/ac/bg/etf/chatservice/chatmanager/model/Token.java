@@ -7,27 +7,16 @@ package rs.ac.bg.etf.chatservice.chatmanager.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  *
  * @author joksin
  */
 @Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
-public class Connect {
+public class Token {
     
-    private String userId;
-    private String dataType;
-    private String messageType;
+    private String value;
     private int expiresIn;
-    private String chatServerUrl;
-    
-    public Connect(String chatServerUrl) {
-        this.chatServerUrl = chatServerUrl;
-    }
     
 }

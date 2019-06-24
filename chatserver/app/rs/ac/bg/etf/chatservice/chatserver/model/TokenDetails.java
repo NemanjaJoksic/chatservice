@@ -15,7 +15,7 @@ import lombok.Getter;
 public class TokenDetails {
     
     private String token;
-    private String name;
+    private String userId;
     private String channel;
     private long timestamp;
     
@@ -25,7 +25,7 @@ public class TokenDetails {
 
     public TokenDetails(String token, String username, String channel, long timestamp) {
         this.token = token;
-        this.name = username;
+        this.userId = username;
         this.channel = channel;
         this.timestamp = timestamp;
     }

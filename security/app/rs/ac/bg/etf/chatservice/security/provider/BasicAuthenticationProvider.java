@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import play.mvc.Http;
 import rs.ac.bg.etf.chatservice.security.crypto.PasswordEncoder;
+import rs.ac.bg.etf.chatservice.security.model.authentication.AnonymousAuthentication;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
 import rs.ac.bg.etf.chatservice.security.model.authentication.RoleBasedAuthentication;
 import rs.ac.bg.etf.chatservice.security.model.user.UserDetails;
@@ -35,8 +36,11 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Http.RequestHeader header) throws ChatServiceException {
         Optional<String> optionalAuthrozationHeader = header.header("Authorization");
-        String authorizationHeader = optionalAuthrozationHeader.orElseThrow(() -> ChatServiceException.generateException(ExceptionData.MISSING_AUTHORIZATION_HEADER));
         
+        if(!optionalAuthrozationHeader.isPresent())
+            return new AnonymousAuthentication();
+        
+        String authorizationHeader = optionalAuthrozationHeader.get();
         String[] credentials = extractCredentialsFromAuthorizationHeader(authorizationHeader);
         Optional<UserDetails> optionalUserDetails = userDetailsService.getUserByUsername(credentials[0]);
         UserDetails userDetails = optionalUserDetails.orElseThrow(() -> ChatServiceException.generateException(ExceptionData.USER_NOT_FOUNT));

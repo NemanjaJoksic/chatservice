@@ -5,28 +5,29 @@
  */
 package rs.ac.bg.etf.chatservice.chatmanager.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import play.libs.Json;
 import play.mvc.Result;
 import play.mvc.Results;
+import rs.ac.bg.etf.chatservice.chatmanager.service.UserService;
 
 /**
  *
  * @author joksin
  */
 @Controller
-public class TestController {
+public class UserController {
     
-    public CompletionStage<Result> user() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("uuid", UUID.randomUUID().toString());
-        map.put("username", "nemanja");
-        return CompletableFuture.supplyAsync(() -> Results.ok(Json.toJson(map)));
+    @Autowired
+    private UserService userService;
+    
+    public CompletionStage<Result> register() {
+        return userService.register()
+                .thenApplyAsync(connect -> {
+                    return Results.ok(Json.toJson(connect));
+                });
     }
     
 }
