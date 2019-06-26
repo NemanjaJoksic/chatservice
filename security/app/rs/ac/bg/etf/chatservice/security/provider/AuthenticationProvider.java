@@ -5,7 +5,7 @@
  */
 package rs.ac.bg.etf.chatservice.security.provider;
 
-import play.mvc.Http;
+import java.util.Optional;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
 import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 
@@ -15,6 +15,6 @@ import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
  */
 public interface AuthenticationProvider {
     
-    public Authentication authenticate(Http.RequestHeader header) throws ChatServiceException;
+    public Authentication authenticate(Optional<String> optionalAuthrozationHeader) throws ChatServiceException;
     
 }

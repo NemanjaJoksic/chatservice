@@ -12,6 +12,7 @@ import play.libs.Json;
 import play.mvc.Result;
 import play.mvc.Results;
 import rs.ac.bg.etf.chatservice.chatmanager.service.ChatService;
+import rs.ac.bg.etf.chatservice.security.SecureController;
 import rs.ac.bg.etf.chatservice.security.context.SecurityContext;
 
 /**
@@ -19,13 +20,12 @@ import rs.ac.bg.etf.chatservice.security.context.SecurityContext;
  * @author joksin
  */
 @Controller
-public class ChatController {
+public class ChatController extends SecureController {
 
     @Autowired
     private ChatService chatService;
 
     public CompletionStage<Result> connect(String dataType, String messageType) {
-        System.out.println("#### Thread: " + Thread.currentThread().getName());
         String principal = SecurityContext.current().getAuthentication().getPrincipal();
         return chatService
                 .connect(principal, dataType, messageType)

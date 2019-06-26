@@ -5,10 +5,14 @@
  */
 package rs.ac.bg.etf.chatservice.security;
 
+import play.mvc.Controller;
+import play.mvc.With;
+
 /**
  *
  * @author joksin
  */
-public class A {
+@With(SecureAction.class)
+public class SecureController extends Controller {
     
 }

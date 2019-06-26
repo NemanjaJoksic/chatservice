@@ -34,8 +34,7 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
     private PasswordEncoder passwordEncoder;
     
     @Override
-    public Authentication authenticate(Http.RequestHeader header) throws ChatServiceException {
-        Optional<String> optionalAuthrozationHeader = header.header("Authorization");
+    public Authentication authenticate(Optional<String> optionalAuthrozationHeader) throws ChatServiceException {
         
         if(!optionalAuthrozationHeader.isPresent())
             return new AnonymousAuthentication();

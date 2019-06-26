@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rs.ac.bg.etf.chatservice.security.filter;
+package rs.ac.bg.etf.chatservice.security;
 
-import akka.stream.Materializer;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
-import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import play.mvc.Http;
 import play.mvc.Result;
 import rs.ac.bg.etf.chatservice.security.context.SecurityContext;
@@ -25,36 +22,31 @@ import rs.ac.bg.etf.chatservice.shared.exception.ExceptionToResultConverter;
  *
  * @author joksin
  */
-@DependsOn({"authenticationProviderManager"})
-public class SecurityFilter extends play.mvc.Filter {
+public class SecureAction extends play.mvc.Action.Simple {
 
-    private static final Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(SecureAction.class);
     
     @Autowired
     private AuthenticationProviderManager authenticationProviderManager;
 
     @Autowired
     private AuthorizationProviderManager authorizationProviderManager;
-
-    public SecurityFilter(Materializer mtrlzr) {
-        super(mtrlzr);
-    }
-
+    
     @Override
-    public CompletionStage<Result> apply(Function<Http.RequestHeader, CompletionStage<Result>> nextFilter, Http.RequestHeader requestHeader) {
-
+    public CompletionStage<Result> call(Http.Context context) {
         logger.info("Setting security context");
 
         try {
-            Authentication authentication = authenticationProviderManager.authenticate(requestHeader);
+            Authentication authentication = authenticationProviderManager.authenticate(context.request().getHeaders().get("Authorization"));
             authentication = authorizationProviderManager.authorize(authentication);
             SecurityContext.setAuthentication(authentication);
-            return nextFilter.apply(requestHeader);
+            return delegate.call(context);
         } catch (Exception ex) {
             return CompletableFuture.completedFuture(
                     ExceptionToResultConverter.convert(ex)
             );
         }
+        
     }
-
+    
 }

@@ -7,6 +7,7 @@ package rs.ac.bg.etf.chatservice.security.provider;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import play.mvc.Http;
@@ -24,7 +25,7 @@ public class AuthenticationProviderManager {
     @Autowired
     private List<AuthenticationProvider> authenticationProviders = new LinkedList<>();
     
-    public Authentication authenticate(Http.RequestHeader header) throws ChatServiceException {
+    public Authentication authenticate(Optional<String> optionalAuthrozationHeader) throws ChatServiceException {
         if (authenticationProviders.isEmpty()) {
             throw ChatServiceException.generateException(ExceptionData.NOT_REGISTERED_AUTHENTICATED_PROVIDERS);
         }
@@ -33,7 +34,7 @@ public class AuthenticationProviderManager {
         ChatServiceException lastException = null;
         for (AuthenticationProvider authenticationProvider : authenticationProviders) {
             try {
-                authentication = authenticationProvider.authenticate(header);
+                authentication = authenticationProvider.authenticate(optionalAuthrozationHeader);
                 if(authentication != null)
                     break;
             } catch (ChatServiceException ex) {
