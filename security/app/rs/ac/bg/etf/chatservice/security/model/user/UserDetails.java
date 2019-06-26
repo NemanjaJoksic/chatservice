@@ -18,6 +18,6 @@ public interface UserDetails {
     
     public String getPassword();
     
-    public List<? extends Authority> getAuthorities();
+    public List<Authority> getAuthorities();
     
 }

@@ -5,12 +5,15 @@
  */
 package rs.ac.bg.etf.chatservice.security.model.authentication;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 /**
  *
  * @author joksin
  */
+@JsonDeserialize(as = SimpleAuthority.class)
 public interface Authority {
-    
+
     public String getAuthority();
-    
+
 }

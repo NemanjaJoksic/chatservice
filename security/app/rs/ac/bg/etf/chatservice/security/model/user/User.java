@@ -7,7 +7,9 @@ package rs.ac.bg.etf.chatservice.security.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import lombok.Setter;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authority;
 
 /**
@@ -15,11 +17,12 @@ import rs.ac.bg.etf.chatservice.security.model.authentication.Authority;
  * @author joksin
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Setter
 public class User implements UserDetails {
 
     private String username;
     private String password;
-    private List<? extends Authority> authorities;
+    private List<Authority> authorities = new LinkedList<>();
     
     public User() {
         
@@ -31,7 +34,7 @@ public class User implements UserDetails {
         this.authorities = Collections.EMPTY_LIST;
     }
 
-    public User(String username, String password, List<? extends Authority> authorities) {
+    public User(String username, String password, List<Authority> authorities) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
@@ -48,7 +51,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public List<? extends Authority> getAuthorities() {
+    public List<Authority> getAuthorities() {
         return this.authorities;
     }
     

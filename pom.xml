@@ -25,6 +25,7 @@
         <module>chatmanager</module>
         <module>security</module>
         <module>shared</module>
+        <module>shareddb</module>
     </modules>
 
     <dependencies>
