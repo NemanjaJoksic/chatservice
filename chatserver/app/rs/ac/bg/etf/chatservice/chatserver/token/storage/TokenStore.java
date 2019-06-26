@@ -6,6 +6,7 @@
 package rs.ac.bg.etf.chatservice.chatserver.token.storage;
 
 import rs.ac.bg.etf.chatservice.chatserver.model.TokenDetails;
+import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 
 /**
  *
@@ -13,10 +14,10 @@ import rs.ac.bg.etf.chatservice.chatserver.model.TokenDetails;
  */
 public interface TokenStore {
     
-    public void put(String ticket, TokenDetails details);
+    public void put(String ticket, TokenDetails details) throws ChatServiceException;
     
-    public TokenDetails get(String ticket);
+    public TokenDetails get(String token) throws ChatServiceException;
     
-    public void remove(String ticket);
+    public void remove(String token) throws ChatServiceException;
     
 }

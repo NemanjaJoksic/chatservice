@@ -29,6 +29,7 @@ public class SecurityContext {
     }
     
     public static void setAuthentication(Authentication authentication) {
+        System.out.println("**** Thread: " + Thread.currentThread().getName());
         int id = NEXT_ID++;
         securityContextHolder.set(new SecurityContext(id, authentication));
     }

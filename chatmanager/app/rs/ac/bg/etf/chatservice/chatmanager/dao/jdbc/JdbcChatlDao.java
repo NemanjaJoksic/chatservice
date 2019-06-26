@@ -7,16 +7,16 @@ package rs.ac.bg.etf.chatservice.chatmanager.dao.jdbc;
 
 import java.sql.ResultSet;
 import org.springframework.stereotype.Repository;
-import rs.ac.bg.etf.chatservice.chatmanager.dao.ChannelDao;
 import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 import rs.ac.bg.etf.chatservice.shareddb.AbstractJdbcDao;
+import rs.ac.bg.etf.chatservice.chatmanager.dao.ChatDao;
 
 /**
  *
  * @author joksin
  */
 @Repository
-public class JdbcChannelDao extends AbstractJdbcDao implements ChannelDao {
+public class JdbcChatlDao extends AbstractJdbcDao implements ChatDao {
     
     private static final String GET_CHANNEL_ID_BY_USER_ID = "SELECT * FROM PERSONAL_CHAT WHERE USER_ID = ?";
     
@@ -28,7 +28,7 @@ public class JdbcChannelDao extends AbstractJdbcDao implements ChannelDao {
     }
 
     @Override
-    public void createChannel(String userId, String channelId) throws ChatServiceException {
+    public void createPersonalChat(String userId, String channelId) throws ChatServiceException {
         jdbcTemplate.update(INSERT_PERSONAL_CHAT, userId, channelId);
     }
     

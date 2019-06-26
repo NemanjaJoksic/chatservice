@@ -20,7 +20,8 @@ public class Consts {
     public static final String IN_MEMORY_ACTOR_STORAGE = "in-memory";
     
     public static final String STORAGE_TICKET_AUTHENTICATOR = "storage";
-    public static final String IN_MEMORY_TICKET_STORAGE = "in-memory";
+    public static final String IN_MEMORY_TOKEN_STORAGE = "in-memory";
+    public static final String JWT_TOKEN_STORAGE = "jwt";
     
     public static final String HAS_MAP_CACHE = "hash-map";
     public static final String NO_CACHE = "no-cache";

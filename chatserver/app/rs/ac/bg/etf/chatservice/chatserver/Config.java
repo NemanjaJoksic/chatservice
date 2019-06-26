@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.etf.chatservice.chatserver;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration
 @PropertySource("classpath:application.conf")
+@Getter
 public class Config {
 
     @Value("${akka.remote.netty.tcp.hostname}")
@@ -22,13 +24,11 @@ public class Config {
 
     @Value("${akka.remote.netty.tcp.port}")
     private String actorTcpPort;
-
-    public String getActorTcpHostname() {
-        return actorTcpHostname;
-    }
-
-    public String getActorTcpPort() {
-        return actorTcpPort;
-    }
+    
+    @Value("${app.token.authentication.storage.jwt.algorithm}")
+    private String jwtSignitureAlgorithm;
+    
+    @Value("${app.token.authentication.storage.jwt.signing-key}")
+    private String jwtSigningKey;
     
 }

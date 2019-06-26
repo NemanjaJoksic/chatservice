@@ -8,6 +8,7 @@ package rs.ac.bg.etf.chatservice.chatmanager.token.impl;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.time.Instant;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.time.DateUtils;

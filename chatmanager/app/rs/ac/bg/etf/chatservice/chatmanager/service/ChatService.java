@@ -15,11 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.etf.chatservice.chatmanager.config.Config;
-import rs.ac.bg.etf.chatservice.chatmanager.dao.ChannelDao;
 import rs.ac.bg.etf.chatservice.chatmanager.executor.ServiceExecutionContext;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Connect;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
 import rs.ac.bg.etf.chatservice.chatmanager.token.TokenGenerator;
+import rs.ac.bg.etf.chatservice.chatmanager.dao.ChatDao;
 
 /**
  *
@@ -40,7 +40,7 @@ public class ChatService {
     private Config config;
 
     @Autowired
-    private ChannelDao channelDao;
+    private ChatDao chatDao;
     
     private ServiceExecutionContext executionContext;
     
@@ -52,10 +52,10 @@ public class ChatService {
     public CompletionStage<Connect> connect(String userId, String dataType, String messageType) {
         return CompletableFuture.supplyAsync(() -> {
             
-            String channel = channelDao.getChannelIdByUserId(userId);
+            String channel = chatDao.getChannelIdByUserId(userId);
             if(channel == null) {
                 channel = UUID.randomUUID().toString();
-                channelDao.createChannel(userId, channel);
+                chatDao.createPersonalChat(userId, channel);
                 logger.info("New channel created [user_id -> {}, channel_id -> {}]", userId, channel);
             }
             
@@ -77,9 +77,9 @@ public class ChatService {
     private String generateChatServerUrl(String token, String dataType, String messageType) {
         StringBuilder sb = new StringBuilder();
         sb.append(config.getChatServerUrl().replaceAll("\"", ""))
-                .append("/").append(token)
                 .append("/").append(dataType)
-                .append("/").append(messageType);
+                .append("/").append(messageType)
+                .append("/").append(token);
         return sb.toString();
     }
 

@@ -25,6 +25,7 @@ public class ChatController {
     private ChatService chatService;
 
     public CompletionStage<Result> connect(String dataType, String messageType) {
+        System.out.println("#### Thread: " + Thread.currentThread().getName());
         String principal = SecurityContext.current().getAuthentication().getPrincipal();
         return chatService
                 .connect(principal, dataType, messageType)

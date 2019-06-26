@@ -11,10 +11,10 @@ import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
  *
  * @author joksin
  */
-public interface ChannelDao {
+public interface ChatDao {
     
     public String getChannelIdByUserId(String userId) throws ChatServiceException;
     
-    public void createChannel(String userId, String channelId) throws ChatServiceException;
+    public void createPersonalChat(String userId, String channelId) throws ChatServiceException;
     
 }

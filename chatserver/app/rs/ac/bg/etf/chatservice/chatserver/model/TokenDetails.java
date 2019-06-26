@@ -23,9 +23,9 @@ public class TokenDetails {
         
     }
 
-    public TokenDetails(String token, String username, String channel, long timestamp) {
+    public TokenDetails(String token, String userId, String channel, long timestamp) {
         this.token = token;
-        this.userId = username;
+        this.userId = userId;
         this.channel = channel;
         this.timestamp = timestamp;
     }

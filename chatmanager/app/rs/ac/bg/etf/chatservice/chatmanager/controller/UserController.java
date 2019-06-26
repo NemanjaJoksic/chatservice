@@ -29,7 +29,7 @@ public class UserController extends play.mvc.Controller {
     private UserService userService;
     
     private final ObjectMapper mapper = new ObjectMapper();
-
+    
     public CompletionStage<Result> register() throws IOException {
         return userService.register(mapper.treeToValue(request().body().asJson(), User.class))
                 .thenApplyAsync(register -> {

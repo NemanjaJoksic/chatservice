@@ -1,2 +1,2 @@
 # Routes
-GET     /chat/:dataType/:messageType/:ticket        rs.ac.bg.etf.chatservice.chatserver.controller.ChatController.chat(dataType:String,messageType:String,ticket:String)
+GET     /chat/:dataType/:messageType/:token        rs.ac.bg.etf.chatservice.chatserver.controller.ChatController.chat(dataType:String,messageType:String,token:String)
