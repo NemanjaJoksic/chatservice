@@ -6,14 +6,12 @@
 package rs.ac.bg.etf.chatservice.chatmanager.dao.jdbc;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import org.springframework.stereotype.Repository;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.UserDao;
 import rs.ac.bg.etf.chatservice.security.model.authentication.SimpleAuthority;
 import rs.ac.bg.etf.chatservice.security.model.user.User;
 import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 import rs.ac.bg.etf.chatservice.shareddb.AbstractJdbcDao;
-import rs.ac.bg.etf.chatservice.shareddb.RowMapper;
 
 /**
  *
@@ -40,18 +38,15 @@ public class JdbcUserDao extends AbstractJdbcDao implements UserDao {
     @Override
     public User getUser(String username) throws ChatServiceException {
         User user = new User();
-        jdbcTemplate.queryForList(GET_USER_BY_USERNAME, new RowMapper<User>() {
-            @Override
-            public User mapRow(int index, ResultSet rs) throws SQLException {
-                if(user.getUsername() == null || user.getUsername().isEmpty()) {
-                    user.setUsername(rs.getString("USERNAME"));
-                    user.setPassword(rs.getString("PASSWORD"));
-                }
-                String role = rs.getString("ROLE_NAME");
-                if(role != null && !role.isEmpty())
-                    user.getAuthorities().add(new SimpleAuthority(role));
-                return null;
+        jdbcTemplate.queryForList(GET_USER_BY_USERNAME, (int index, ResultSet rs) -> {
+            if(user.getUsername() == null || user.getUsername().isEmpty()) {
+                user.setUsername(rs.getString("USERNAME"));
+                user.setPassword(rs.getString("PASSWORD"));
             }
+            String role = rs.getString("ROLE_NAME");
+            if(role != null && !role.isEmpty())
+                user.getAuthorities().add(new SimpleAuthority(role));
+            return null;
         }, username);
         return user;
     }

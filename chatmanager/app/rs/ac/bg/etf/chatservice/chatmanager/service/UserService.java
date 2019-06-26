@@ -42,7 +42,6 @@ public class UserService implements UserDetailsService {
     }
     
     public CompletionStage<Register> register(User user) {
-        System.out.println(user);
         return CompletableFuture.supplyAsync(() -> {
             userDao.createUser(user);
             return new Register(user.getUsername(), Register.SUCCESS);

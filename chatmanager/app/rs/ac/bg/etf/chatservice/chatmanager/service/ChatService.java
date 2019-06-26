@@ -6,12 +6,14 @@
 package rs.ac.bg.etf.chatservice.chatmanager.service;
 
 import akka.actor.ActorSystem;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.etf.chatservice.chatmanager.config.Config;
+import rs.ac.bg.etf.chatservice.chatmanager.dao.ChannelDao;
 import rs.ac.bg.etf.chatservice.chatmanager.executor.ServiceExecutionContext;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Connect;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
@@ -33,6 +35,9 @@ public class ChatService {
     @Autowired
     private Config config;
 
+    @Autowired
+    private ChannelDao channelDao;
+    
     private ServiceExecutionContext executionContext;
     
     @PostConstruct
@@ -42,7 +47,14 @@ public class ChatService {
     
     public CompletionStage<Connect> connect(String userId, String dataType, String messageType) {
         return CompletableFuture.supplyAsync(() -> {
-            Token token = tokenGenerator.generate(userId, null);
+            
+            String channel = channelDao.getChannelIdByUserId(userId);
+            if(channel == null) {
+                channel = UUID.randomUUID().toString();
+                channelDao.createChannel(userId, channel);
+            }
+            
+            Token token = tokenGenerator.generate(userId, channel);
             String chatServerUrl = generateChatServerUrl(token.getValue(), dataType, messageType);
             Connect connect = new Connect();
             connect.setChatServerUrl(chatServerUrl);
