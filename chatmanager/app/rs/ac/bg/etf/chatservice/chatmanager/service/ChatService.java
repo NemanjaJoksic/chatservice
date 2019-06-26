@@ -10,6 +10,8 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import javax.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.etf.chatservice.chatmanager.config.Config;
@@ -26,6 +28,8 @@ import rs.ac.bg.etf.chatservice.chatmanager.token.TokenGenerator;
 @Service
 public class ChatService {
 
+    private static final Logger logger = LoggerFactory.getLogger(ChatService.class);
+    
     @Autowired
     private ActorSystem actorSystem;
     
@@ -52,9 +56,13 @@ public class ChatService {
             if(channel == null) {
                 channel = UUID.randomUUID().toString();
                 channelDao.createChannel(userId, channel);
+                logger.info("New channel created [user_id -> {}, channel_id -> {}]", userId, channel);
             }
             
             Token token = tokenGenerator.generate(userId, channel);
+            logger.info("Token generated {}", token.getValue());
+            logger.info("User connected [user_id -> {}, channel_id -> {}]", userId, channel);
+            
             String chatServerUrl = generateChatServerUrl(token.getValue(), dataType, messageType);
             Connect connect = new Connect();
             connect.setChatServerUrl(chatServerUrl);

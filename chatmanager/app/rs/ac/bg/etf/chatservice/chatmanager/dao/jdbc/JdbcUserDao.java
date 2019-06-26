@@ -6,6 +6,7 @@
 package rs.ac.bg.etf.chatservice.chatmanager.dao.jdbc;
 
 import java.sql.ResultSet;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.springframework.stereotype.Repository;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.UserDao;
 import rs.ac.bg.etf.chatservice.security.model.authentication.SimpleAuthority;
@@ -37,18 +38,20 @@ public class JdbcUserDao extends AbstractJdbcDao implements UserDao {
 
     @Override
     public User getUser(String username) throws ChatServiceException {
+        AtomicBoolean found = new AtomicBoolean(false);
         User user = new User();
         jdbcTemplate.queryForList(GET_USER_BY_USERNAME, (int index, ResultSet rs) -> {
             if(user.getUsername() == null || user.getUsername().isEmpty()) {
                 user.setUsername(rs.getString("USERNAME"));
                 user.setPassword(rs.getString("PASSWORD"));
+                found.getAndSet(true);
             }
             String role = rs.getString("ROLE_NAME");
             if(role != null && !role.isEmpty())
                 user.getAuthorities().add(new SimpleAuthority(role));
             return null;
         }, username);
-        return user;
+        return found.get() ? user : null;
     }
     
 }
