@@ -14,8 +14,8 @@ import play.mvc.Http;
 public enum ExceptionData {
 
     // chat server exceptions
-    TICKET_EXPIRED("Ticket [#ARG#] has expired", Http.Status.UNAUTHORIZED),
-    INVALID_TICKET("Invalid ticket [#ARG#]", Http.Status.UNAUTHORIZED),
+    TOKEN_EXPIRED("Token [#ARG#] has expired", Http.Status.UNAUTHORIZED),
+    INVALID_TOKEN("Invalid token [#ARG#]", Http.Status.UNAUTHORIZED),
     INVALID_MESSAGE_TYPE("Invalid message type [#ARG#]", Http.Status.BAD_REQUEST),
     INVALID_DATA_TYPE("Invalid data type [#ARG#]", Http.Status.BAD_REQUEST),
     

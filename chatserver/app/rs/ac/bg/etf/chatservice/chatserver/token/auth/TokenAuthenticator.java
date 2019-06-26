@@ -24,16 +24,16 @@ public class TokenAuthenticator {
     @Autowired
     private TokenStore tokenStore;
 
-    public TokenDetails validateToken(String ticket) throws ChatServiceException {
-        TokenDetails details = tokenStore.get(ticket);
+    public TokenDetails validateToken(String token) throws ChatServiceException {
+        TokenDetails details = tokenStore.get(token);
         
         if(details == null)
-            throw ChatServiceException.generateException(ExceptionData.INVALID_TICKET, Arrays.asList(ticket));
+            throw ChatServiceException.generateException(ExceptionData.INVALID_TOKEN, Arrays.asList(token));
         
         if(details.getTimestamp() < System.currentTimeMillis())
-            throw ChatServiceException.generateException(ExceptionData.TICKET_EXPIRED, Arrays.asList(ticket));
+            throw ChatServiceException.generateException(ExceptionData.TOKEN_EXPIRED, Arrays.asList(token));
         
-        tokenStore.remove(ticket);
+        tokenStore.remove(token);
         return details;
     }
 
