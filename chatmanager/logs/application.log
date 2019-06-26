@@ -1,4 +1,6 @@
-2019-06-24 21:05:13,738 [WARN] from application in netty-event-loop-3 - Using the following cache for assets configuration:
+2019-06-26 11:25:57,948 [INFO] from application in netty-event-loop-3 - Creating Pool for datasource 'default'
+2019-06-26 11:25:58,100 [INFO] from play.api.db.DefaultDBApi in netty-event-loop-3 - Database [default] connected at jdbc:h2:mem:users
+2019-06-26 11:25:58,223 [WARN] from application in netty-event-loop-3 - Using the following cache for assets configuration:
 	 enabledCaching = false
 	 enabledCacheControl = false
 	 defaultCacheControl = public, max-age=3600
@@ -6,13 +8,13 @@
 	 configuredCacheControl:
 
 
-2019-06-24 21:05:13,895 [WARN] from akka.util.ManifestInfo in application-akka.actor.default-dispatcher-4 - Detected possible incompatible versions on the classpath. Please note that a given Akka version MUST be the same across all modules of Akka that you are using, e.g. if you use [2.5.19] all other modules that are released together MUST be of the same version. Make sure you're using a compatible set of libraries. Possibly conflicting versions [2.5.19, 2.5.8] in libraries [akka-actor:2.5.19, akka-slf4j:2.5.8, akka-stream:2.5.8]
-2019-06-24 21:05:14,144 [INFO] from play.api.http.EnabledFilters in netty-event-loop-3 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2019-06-26 11:25:58,389 [WARN] from akka.util.ManifestInfo in application-akka.actor.default-dispatcher-8 - Detected possible incompatible versions on the classpath. Please note that a given Akka version MUST be the same across all modules of Akka that you are using, e.g. if you use [2.5.19] all other modules that are released together MUST be of the same version. Make sure you're using a compatible set of libraries. Possibly conflicting versions [2.5.19, 2.5.8] in libraries [akka-actor:2.5.19, akka-slf4j:2.5.8, akka-stream:2.5.8]
+2019-06-26 11:25:58,814 [INFO] from play.api.http.EnabledFilters in netty-event-loop-3 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     rs.ac.bg.etf.chatservice.security.filter.SecurityFilter
 
-2019-06-24 21:05:14,196 [INFO] from play.api.http.EnabledFilters in netty-event-loop-3 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2019-06-26 11:25:58,876 [INFO] from play.api.http.EnabledFilters in netty-event-loop-3 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     rs.ac.bg.etf.chatservice.security.filter.SecurityFilter
 
-2019-06-24 21:05:14,444 [INFO] from play.api.Play in netty-event-loop-3 - Application started (Dev)
+2019-06-26 11:25:59,072 [INFO] from play.api.Play in netty-event-loop-3 - Application started (Dev)

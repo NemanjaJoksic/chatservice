@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import rs.ac.bg.etf.chatservice.chatmanager.config.Config;
 import rs.ac.bg.etf.chatservice.chatmanager.executor.ServiceExecutionContext;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Connect;
-import rs.ac.bg.etf.chatservice.chatmanager.model.Register;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
 import rs.ac.bg.etf.chatservice.chatmanager.token.TokenGenerator;
 
@@ -39,12 +38,6 @@ public class ChatService {
     @PostConstruct
     public void init() {
         executionContext = new ServiceExecutionContext(actorSystem);
-    }
-    
-    public CompletionStage<Register> register() {
-        return CompletableFuture.supplyAsync(() -> {
-            return new Register();
-        }, executionContext);
     }
     
     public CompletionStage<Connect> connect(String userId, String dataType, String messageType) {

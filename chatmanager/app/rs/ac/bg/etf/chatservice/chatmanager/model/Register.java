@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.etf.chatservice.chatmanager.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -12,8 +13,12 @@ import lombok.Getter;
  * @author joksin
  */
 @Getter
+@AllArgsConstructor
 public class Register {
     
-    private String status = "SUCCESS";
+    public static final String SUCCESS = "SUCCESS";
+    
+    private String username;
+    private String status;
     
 }

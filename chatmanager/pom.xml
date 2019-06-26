@@ -24,6 +24,12 @@
         
         <dependency>
             <groupId>rs.ac.bg.etf</groupId>
+            <artifactId>shareddb</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>rs.ac.bg.etf</groupId>
             <artifactId>security</artifactId>
             <version>${project.version}</version>
         </dependency>
