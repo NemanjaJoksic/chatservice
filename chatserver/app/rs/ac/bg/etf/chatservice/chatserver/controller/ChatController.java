@@ -37,8 +37,7 @@ public class ChatController {
                     return chatService.openConnection(dataType, messageType, token);
                 });
             default:
-                throw ChatServiceException.generateException(ExceptionData.INVALID_DATA_TYPE, 
-                        Arrays.asList(dataType));
+                throw ChatServiceException.generateException(ExceptionData.INVALID_DATA_TYPE, dataType);
         }
     }
 

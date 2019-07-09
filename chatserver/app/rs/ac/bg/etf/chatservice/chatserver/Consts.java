@@ -19,6 +19,7 @@ public class Consts {
     
     public static final String ACTOR_STORAGE_TYPE = "app.akka.actor.storage.type";
     public static final String IN_MEMORY_ACTOR_STORAGE = "in-memory";
+    public static final String REDIS_ACTOR_STORAGE = "redis";
     
     public static final String STORAGE_TICKET_AUTHENTICATOR = "storage";
     public static final String TOKEN_STORAGE_TYPE = "app.token.authentication.storage.type";

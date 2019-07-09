@@ -31,4 +31,10 @@ public class Config {
     @Value("${app.token.authentication.storage.jwt.signing-key}")
     private String jwtSigningKey;
     
+    @Value("${app.akka.actor.storage.redis.host}")
+    private String redisHost;
+    
+    @Value("${app.akka.actor.storage.redis.port}")
+    private Integer redisPort;
+    
 }

@@ -5,7 +5,6 @@
  */
 package rs.ac.bg.etf.chatservice.shared.exception;
 
-import java.util.List;
 import java.util.concurrent.CompletionException;
 import play.mvc.Http;
 
@@ -35,7 +34,7 @@ public class ChatServiceException extends CompletionException {
         return exception;
     }
     
-    public static ChatServiceException generateException(ExceptionData ex, List<String> args) {
+    public static ChatServiceException generateException(ExceptionData ex, String... args) {
         ChatServiceException exception = new ChatServiceException(ex.getStatus(), 
                 replaceArgs(ex.getMessage(), args));
         return exception;
@@ -46,7 +45,7 @@ public class ChatServiceException extends CompletionException {
         return exception;
     }
     
-    private static String replaceArgs(String template, List<String> args) {
+    private static String replaceArgs(String template, String... args) {
         String httpMessage = template;
         for(String arg : args)
             httpMessage = httpMessage.replaceFirst("#ARG#", arg);

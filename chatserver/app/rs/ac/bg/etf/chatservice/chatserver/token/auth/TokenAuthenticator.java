@@ -28,10 +28,10 @@ public class TokenAuthenticator {
         TokenDetails details = tokenStore.get(token);
         
         if(details == null)
-            throw ChatServiceException.generateException(ExceptionData.INVALID_TOKEN, Arrays.asList(token));
+            throw ChatServiceException.generateException(ExceptionData.INVALID_TOKEN, token);
         
         if(details.getTimestamp() < System.currentTimeMillis())
-            throw ChatServiceException.generateException(ExceptionData.TOKEN_EXPIRED, Arrays.asList(token));
+            throw ChatServiceException.generateException(ExceptionData.TOKEN_EXPIRED, token);
         
         tokenStore.remove(token);
         return details;

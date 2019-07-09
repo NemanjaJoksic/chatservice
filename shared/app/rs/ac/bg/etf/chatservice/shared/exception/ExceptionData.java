@@ -18,6 +18,8 @@ public enum ExceptionData {
     INVALID_TOKEN("Invalid token [#ARG#]", Http.Status.UNAUTHORIZED),
     INVALID_MESSAGE_TYPE("Invalid message type [#ARG#]", Http.Status.BAD_REQUEST),
     INVALID_DATA_TYPE("Invalid data type [#ARG#]", Http.Status.BAD_REQUEST),
+    UNABLE_TO_CONNECT_TO_REDIS("Unable to connect to redis server #ARG#:#ARG#", Http.Status.INTERNAL_SERVER_ERROR),
+    REDIS_CONNECTION_ERROR("Redis connection error", Http.Status.INTERNAL_SERVER_ERROR),
     
     // securiy exceptions
     NOT_REGISTERED_AUTHENTICATED_PROVIDERS("There is no registered authentication providers", Http.Status.INTERNAL_SERVER_ERROR),

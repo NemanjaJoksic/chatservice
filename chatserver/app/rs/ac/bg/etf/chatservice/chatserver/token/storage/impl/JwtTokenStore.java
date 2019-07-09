@@ -47,9 +47,9 @@ public class JwtTokenStore implements TokenStore {
             long timestamp = claims.getExpiration().getTime();
             return new TokenDetails(token, userId, channel, timestamp);
         } catch (ExpiredJwtException ex) { 
-            throw ChatServiceException.generateException(ExceptionData.TOKEN_EXPIRED, Arrays.asList(token));
+            throw ChatServiceException.generateException(ExceptionData.TOKEN_EXPIRED, token);
         } catch (Exception ex) {
-            throw ChatServiceException.generateException(ExceptionData.INVALID_TOKEN, Arrays.asList(token));
+            throw ChatServiceException.generateException(ExceptionData.INVALID_TOKEN, token);
         }
     }
 

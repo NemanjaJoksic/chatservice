@@ -89,8 +89,7 @@ public class ChatService {
                         actorSystem,
                         materializer));
             } catch (BeansException ex) {
-                throw ChatServiceException.generateException(ExceptionData.INVALID_MESSAGE_TYPE,
-                        Arrays.asList(messageType));
+                throw ChatServiceException.generateException(ExceptionData.INVALID_MESSAGE_TYPE, messageType);
             }
         }, executionContext);
     }

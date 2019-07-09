@@ -38,20 +38,20 @@ import rs.ac.bg.etf.chatservice.chatserver.executor.StorageExecutionContext;
  */
 @Component
 @ConditionalOnProperty(name = ACTOR_STORAGE_TYPE, havingValue = IN_MEMORY_ACTOR_STORAGE)
-public class InMemoryConnectionHolderActorStorage implements MessageHandlerActorStorage {
+public class InMemoryMessageHandlerActorStorage implements MessageHandlerActorStorage {
 
     private static class SubscriberActor extends AbstractActor {
 
         private static final Logger logger = LoggerFactory.getLogger(SubscriberActor.class);
 
-        public static Props props(InMemoryConnectionHolderActorStorage actorStorage) {
+        public static Props props(InMemoryMessageHandlerActorStorage actorStorage) {
             return Props.create(SubscriberActor.class, actorStorage)
                     .withDispatcher(ACTOR_DISPATCHER);
         }
 
-        private final InMemoryConnectionHolderActorStorage actorStorage;
+        private final InMemoryMessageHandlerActorStorage actorStorage;
 
-        public SubscriberActor(InMemoryConnectionHolderActorStorage actorStorage) {
+        public SubscriberActor(InMemoryMessageHandlerActorStorage actorStorage) {
             this.actorStorage = actorStorage;
         }
 
@@ -98,7 +98,7 @@ public class InMemoryConnectionHolderActorStorage implements MessageHandlerActor
 
     }
 
-    private final Logger logger = LoggerFactory.getLogger(InMemoryConnectionHolderActorStorage.class);
+    private final Logger logger = LoggerFactory.getLogger(InMemoryMessageHandlerActorStorage.class);
 
     @Autowired
     private ActorSystem actorSystem;
