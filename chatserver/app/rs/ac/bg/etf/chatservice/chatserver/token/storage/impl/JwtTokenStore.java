@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import rs.ac.bg.etf.chatservice.chatserver.Config;
 import rs.ac.bg.etf.chatservice.chatserver.token.storage.TokenStore;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.JWT_TOKEN_STORAGE;
+import static rs.ac.bg.etf.chatservice.chatserver.Consts.TOKEN_STORAGE_TYPE;
 import rs.ac.bg.etf.chatservice.chatserver.model.TokenDetails;
 import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 import rs.ac.bg.etf.chatservice.shared.exception.ExceptionData;
@@ -25,7 +26,7 @@ import rs.ac.bg.etf.chatservice.shared.exception.ExceptionData;
  * @author joksin
  */
 @Repository
-@ConditionalOnProperty(name = "app.token.authentication.storage.type", havingValue = JWT_TOKEN_STORAGE)
+@ConditionalOnProperty(name = TOKEN_STORAGE_TYPE, havingValue = JWT_TOKEN_STORAGE)
 public class JwtTokenStore implements TokenStore {
 
     @Autowired

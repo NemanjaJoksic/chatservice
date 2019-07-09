@@ -17,9 +17,11 @@ public class Consts {
     public static final String JSON_SERIALIZATION = "json";
     public static final String PROTOBUF_SERIALIZATION = "protobuf";
     
+    public static final String ACTOR_STORAGE_TYPE = "app.akka.actor.storage.type";
     public static final String IN_MEMORY_ACTOR_STORAGE = "in-memory";
     
     public static final String STORAGE_TICKET_AUTHENTICATOR = "storage";
+    public static final String TOKEN_STORAGE_TYPE = "app.token.authentication.storage.type";
     public static final String IN_MEMORY_TOKEN_STORAGE = "in-memory";
     public static final String JWT_TOKEN_STORAGE = "jwt";
     

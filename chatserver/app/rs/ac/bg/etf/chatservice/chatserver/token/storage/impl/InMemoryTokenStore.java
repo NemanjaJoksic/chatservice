@@ -18,13 +18,14 @@ import org.springframework.stereotype.Repository;
 import rs.ac.bg.etf.chatservice.chatserver.model.TokenDetails;
 import rs.ac.bg.etf.chatservice.chatserver.token.storage.TokenStore;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.IN_MEMORY_TOKEN_STORAGE;
+import static rs.ac.bg.etf.chatservice.chatserver.Consts.TOKEN_STORAGE_TYPE;
 
 /**
  *
  * @author joksin
  */
 @Repository
-@ConditionalOnProperty(name = "app.token.authentication.storage.type", havingValue = IN_MEMORY_TOKEN_STORAGE)
+@ConditionalOnProperty(name = TOKEN_STORAGE_TYPE, havingValue = IN_MEMORY_TOKEN_STORAGE)
 public class InMemoryTokenStore implements TokenStore {
 
     private Map<String, TokenDetails> map;

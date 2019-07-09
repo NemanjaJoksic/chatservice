@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.ACTOR_DISPATCHER;
+import static rs.ac.bg.etf.chatservice.chatserver.Consts.ACTOR_STORAGE_TYPE;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.IN_MEMORY_ACTOR_STORAGE;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.TOPIC_ACTOR;
 import rs.ac.bg.etf.chatservice.chatserver.actor.message.ActorStarted;
@@ -36,7 +37,7 @@ import rs.ac.bg.etf.chatservice.chatserver.executor.StorageExecutionContext;
  * @author joksin
  */
 @Component
-@ConditionalOnProperty(name = "app.akka.actor.storage.type", havingValue = IN_MEMORY_ACTOR_STORAGE)
+@ConditionalOnProperty(name = ACTOR_STORAGE_TYPE, havingValue = IN_MEMORY_ACTOR_STORAGE)
 public class InMemoryConnectionHolderActorStorage implements MessageHandlerActorStorage {
 
     private static class SubscriberActor extends AbstractActor {
