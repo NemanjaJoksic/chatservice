@@ -63,6 +63,7 @@ public class RedisMessageHandlerActorStorage implements MessageHandlerActorStora
         return runAsync(() -> {
             try (Jedis jedis = pool.getResource()) {
                 jedis.hset(HASH_SET_NAME, id, actor);
+                logger.info("Actor [{}] with address [{}] are added to storage", id, actor);
             } catch (JedisConnectionException ex) {
                 throw ChatServiceException.generateException(ex);
             }
@@ -85,6 +86,7 @@ public class RedisMessageHandlerActorStorage implements MessageHandlerActorStora
         return runAsync(() -> {
             try (Jedis jedis = pool.getResource()) {
                 jedis.hdel(HASH_SET_NAME, id);
+                logger.info("Actor [{}] are removed from storage", id);
             } catch (JedisConnectionException ex) {
                 throw ChatServiceException.generateException(ex);
             }
