@@ -13,6 +13,6 @@ import play.mvc.With;
  * @author joksin
  */
 @With(SecureAction.class)
-public class SecureController extends Controller {
+public abstract class SecureController extends Controller {
     
 }
