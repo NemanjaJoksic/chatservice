@@ -71,11 +71,11 @@ public class ChatService {
         this.executionContext = new WebsocketExecutionContext(actorSystem);
     }
 
-    public CompletableFuture openConnection(String dataType, String messageType, String ticket) {
+    public CompletableFuture openConnection(String dataType, String messageType, String token) {
         return CompletableFuture.supplyAsync(() -> {
 
             try {
-                TokenDetails details = tokenAuthenticator.validateToken(ticket);
+                TokenDetails details = tokenAuthenticator.validateToken(token);
                 MessageSerializer messageSerializer = factory.getBean(messageType, MessageSerializer.class);
                 OutputSerializer outputSerializer = factory.getBean(dataType, OutputSerializer.class);
 
