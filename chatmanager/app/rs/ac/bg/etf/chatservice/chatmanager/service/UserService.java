@@ -6,6 +6,7 @@
 package rs.ac.bg.etf.chatservice.chatmanager.service;
 
 import akka.actor.ActorSystem;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.UserDao;
 import rs.ac.bg.etf.chatservice.chatmanager.executor.ServiceExecutionContext;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Register;
+import rs.ac.bg.etf.chatservice.security.model.authentication.SimpleAuthority;
 import rs.ac.bg.etf.chatservice.security.model.user.User;
 import rs.ac.bg.etf.chatservice.security.model.user.UserDetails;
 import rs.ac.bg.etf.chatservice.security.service.UserDetailsService;
@@ -47,6 +49,7 @@ public class UserService implements UserDetailsService {
     
     public CompletionStage<Register> register(User user) {
         return CompletableFuture.supplyAsync(() -> {
+            user.setAuthorities(Arrays.asList(new SimpleAuthority("USER_ROLE")));
             userDao.createUser(user);
             logger.info("New user registered [username -> {}]", user.getUsername());
             return new Register(user.getUsername(), Register.SUCCESS);
