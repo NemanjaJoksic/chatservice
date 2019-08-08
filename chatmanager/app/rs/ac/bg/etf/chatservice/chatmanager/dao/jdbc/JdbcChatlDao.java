@@ -7,9 +7,9 @@ package rs.ac.bg.etf.chatservice.chatmanager.dao.jdbc;
 
 import java.sql.ResultSet;
 import org.springframework.stereotype.Repository;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 import rs.ac.bg.etf.chatservice.shareddb.AbstractJdbcDao;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.ChatDao;
+import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
 
 /**
  *
@@ -23,12 +23,12 @@ public class JdbcChatlDao extends AbstractJdbcDao implements ChatDao {
     private static final String INSERT_PERSONAL_CHAT = "INSERT INTO PERSONAL_CHAT(USER_ID,CHANNEL_ID) VALUES(?,?)";
 
     @Override
-    public String getChannelIdByUserId(String userId) throws ChatServiceException {
+    public String getChannelIdByUserId(String userId) throws GeneralException {
         return jdbcTemplate.queryForObject(GET_CHANNEL_ID_BY_USER_ID, (int index, ResultSet rs) -> rs.getString("CHANNEL_ID"), userId);
     }
 
     @Override
-    public void createPersonalChat(String userId, String channelId) throws ChatServiceException {
+    public void createPersonalChat(String userId, String channelId) throws GeneralException {
         jdbcTemplate.update(INSERT_PERSONAL_CHAT, userId, channelId);
     }
     

@@ -15,7 +15,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import play.api.db.Database;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
+import rs.ac.bg.etf.chatservice.shareddb.exception.DbException;
 
 /**
  *
@@ -27,7 +27,7 @@ public class JdbcTemplate {
     @Autowired
     private Database db;
 
-    public <T> T queryForObject(String sql, RowMapper<T> rowMapper) throws ChatServiceException {
+    public <T> T queryForObject(String sql, RowMapper<T> rowMapper) throws DbException {
         try {
             ResultSet rs = db.getConnection().prepareStatement(sql).executeQuery();
             if (rs.next()) {
@@ -36,11 +36,11 @@ public class JdbcTemplate {
                 return null;
             }
         } catch (Exception ex) {
-            throw ChatServiceException.generateException(ex);
+            throw new DbException(ex);
         }
     }
 
-    public <T> T queryForObject(String sql, RowMapper<T> rowMapper, Object... objs) throws ChatServiceException {
+    public <T> T queryForObject(String sql, RowMapper<T> rowMapper, Object... objs) throws DbException {
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             setParams(ps, objs);
@@ -51,11 +51,11 @@ public class JdbcTemplate {
                 return null;
             }
         } catch (Exception ex) {
-            throw ChatServiceException.generateException(ex);
+            throw new DbException(ex);
         }
     }
 
-    public <T> List<T> queryForList(String sql, RowMapper<T> rowMapper) throws ChatServiceException {
+    public <T> List<T> queryForList(String sql, RowMapper<T> rowMapper) throws DbException {
         try {
             ResultSet rs = db.getConnection().prepareStatement(sql).executeQuery();
             List<T> retList = new ArrayList<>();
@@ -65,11 +65,11 @@ public class JdbcTemplate {
             }
             return retList;
         } catch (Exception ex) {
-            throw ChatServiceException.generateException(ex);
+            throw new DbException(ex);
         }
     }
 
-    public <T> List<T> queryForList(String sql, RowMapper<T> rowMapper, Object... objs) throws ChatServiceException {
+    public <T> List<T> queryForList(String sql, RowMapper<T> rowMapper, Object... objs) throws DbException {
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             setParams(ps, objs);
@@ -81,25 +81,25 @@ public class JdbcTemplate {
             }
             return retList;
         } catch (Exception ex) {
-            throw ChatServiceException.generateException(ex);
+            throw new DbException(ex);
         }
     }
 
-    public Integer update(String sql) throws ChatServiceException {
+    public Integer update(String sql) throws DbException {
         try {
             return db.getConnection().prepareStatement(sql).executeUpdate();
         } catch (Exception ex) {
-            throw ChatServiceException.generateException(ex);
+            throw new DbException(ex);
         }
     }
 
-    public Integer update(String sql, Object... objs) throws ChatServiceException {
+    public Integer update(String sql, Object... objs) throws DbException {
         try {
             PreparedStatement ps = db.getConnection().prepareStatement(sql);
             setParams(ps, objs);
             return ps.executeUpdate();
         } catch (Exception ex) {
-            throw ChatServiceException.generateException(ex);
+            throw new DbException(ex);
         }
     }
 

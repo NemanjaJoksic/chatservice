@@ -12,13 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import play.mvc.Http;
 import rs.ac.bg.etf.chatservice.security.crypto.PasswordEncoder;
+import rs.ac.bg.etf.chatservice.security.exception.InvalidAuthorizationHeaderException;
+import rs.ac.bg.etf.chatservice.security.exception.UserNotFoundException;
+import rs.ac.bg.etf.chatservice.security.exception.WrongPasswordException;
 import rs.ac.bg.etf.chatservice.security.model.authentication.AnonymousAuthentication;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
 import rs.ac.bg.etf.chatservice.security.model.authentication.RoleBasedAuthentication;
 import rs.ac.bg.etf.chatservice.security.model.user.UserDetails;
 import rs.ac.bg.etf.chatservice.security.service.UserDetailsService;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
-import rs.ac.bg.etf.chatservice.shared.exception.ExceptionData;
 
 /**
  *
@@ -34,7 +35,7 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
     private PasswordEncoder passwordEncoder;
     
     @Override
-    public Authentication authenticate(Optional<String> optionalAuthrozationHeader) throws ChatServiceException {
+    public Authentication authenticate(Optional<String> optionalAuthrozationHeader) throws SecurityException {
         
         if(!optionalAuthrozationHeader.isPresent())
             return new AnonymousAuthentication();
@@ -42,24 +43,24 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
         String authorizationHeader = optionalAuthrozationHeader.get();
         String[] credentials = extractCredentialsFromAuthorizationHeader(authorizationHeader);
         Optional<UserDetails> optionalUserDetails = userDetailsService.getUserByUsername(credentials[0]);
-        UserDetails userDetails = optionalUserDetails.orElseThrow(() -> ChatServiceException.generateException(ExceptionData.USER_NOT_FOUNT));
+        UserDetails userDetails = optionalUserDetails.orElseThrow(() -> new UserNotFoundException());
         
         if(!passwordEncoder.matches(credentials[1], userDetails.getPassword())) {
-            throw ChatServiceException.generateException(ExceptionData.WRONG_PASSWORD);
+            throw new WrongPasswordException();
         }
         
         return new RoleBasedAuthentication(userDetails.getUsername(), userDetails.getAuthorities());
     }
     
-    private String[] extractCredentialsFromAuthorizationHeader(String authorization) throws ChatServiceException {
+    private String[] extractCredentialsFromAuthorizationHeader(String authorization) throws SecurityException {
 
         if (!authorization.toLowerCase().startsWith("basic")) {
-            throw ChatServiceException.generateException(ExceptionData.INVALID_AUTHORIZATION_HEADER);
+            throw new InvalidAuthorizationHeaderException();
         }
 
         String[] split = authorization.split(" ");
         if (split.length != 2) {
-            throw ChatServiceException.generateException(ExceptionData.INVALID_AUTHORIZATION_HEADER);
+            throw new InvalidAuthorizationHeaderException();
         }
 
         byte[] credDecoded = Base64.getDecoder().decode(split[1]);

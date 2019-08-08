@@ -5,15 +5,14 @@
  */
 package rs.ac.bg.etf.chatservice.chatserver.controller;
 
-import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import play.mvc.*;
 import rs.ac.bg.etf.chatservice.chatserver.service.ChatService;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.TEXT_DATA;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.BINARY_DATA;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
-import rs.ac.bg.etf.chatservice.shared.exception.ExceptionData;
+import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
+import rs.ac.bg.etf.chatservice.chatserver.exception.InvalidDataTypeException;
 
 /**
  *
@@ -25,7 +24,7 @@ public class ChatController {
     @Autowired
     private ChatService chatService;
 
-    public WebSocket chat(String dataType, String messageType, String token) throws ChatServiceException {
+    public WebSocket chat(String dataType, String messageType, String token) throws ChatServerException {
 
         switch (dataType) {
             case TEXT_DATA:
@@ -37,7 +36,7 @@ public class ChatController {
                     return chatService.openConnection(dataType, messageType, token);
                 });
             default:
-                throw ChatServiceException.generateException(ExceptionData.INVALID_DATA_TYPE, dataType);
+                throw new InvalidDataTypeException(dataType);
         }
     }
 

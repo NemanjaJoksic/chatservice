@@ -9,9 +9,9 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import org.springframework.stereotype.Component;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.PROTOBUF_SERIALIZATION;
 import rs.ac.bg.etf.chatservice.chatserver.actor.serializer.MessageSerializer;
+import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
 import rs.ac.bg.etf.chatservice.chatserver.model.Messages;
 import rs.ac.bg.etf.chatservice.chatserver.model.ProtobufMessages;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 
 /**
  *
@@ -21,7 +21,7 @@ import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 public class ProtobufMessageSerializer implements MessageSerializer {
 
     @Override
-    public byte[] serialize(Messages.ChatMessage message) throws ChatServiceException {
+    public byte[] serialize(Messages.ChatMessage message) throws ChatServerException {
         ProtobufMessages.ChatMessage.Builder builder = ProtobufMessages.ChatMessage.newBuilder();
         builder.setSender(message.getSender());
         builder.setReceiver(message.getReceiver());
@@ -30,7 +30,7 @@ public class ProtobufMessageSerializer implements MessageSerializer {
     }
 
     @Override
-    public Messages.ChatMessage deserialize(byte[] bytes) throws ChatServiceException {
+    public Messages.ChatMessage deserialize(byte[] bytes) throws ChatServerException {
         try {
             ProtobufMessages.ChatMessage messageInfo = ProtobufMessages.ChatMessage.parseFrom(bytes);
             Messages.ChatMessage message = new Messages.ChatMessage();
@@ -39,7 +39,7 @@ public class ProtobufMessageSerializer implements MessageSerializer {
             message.setMessage(messageInfo.getMessage());
             return message;
         } catch (InvalidProtocolBufferException ex) {
-            throw ChatServiceException.generateException(ex);
+            throw new ChatServerException(ex);
         }
     }
     

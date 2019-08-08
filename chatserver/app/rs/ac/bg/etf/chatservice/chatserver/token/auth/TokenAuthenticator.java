@@ -8,10 +8,11 @@ package rs.ac.bg.etf.chatservice.chatserver.token.auth;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
+import rs.ac.bg.etf.chatservice.chatserver.exception.InvalidTokenException;
+import rs.ac.bg.etf.chatservice.chatserver.exception.TokenExpiredException;
 import rs.ac.bg.etf.chatservice.chatserver.model.TokenDetails;
 import rs.ac.bg.etf.chatservice.chatserver.token.storage.TokenStore;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
-import rs.ac.bg.etf.chatservice.shared.exception.ExceptionData;
 
 /**
  *
@@ -24,14 +25,14 @@ public class TokenAuthenticator {
     @Autowired
     private TokenStore tokenStore;
 
-    public TokenDetails validateToken(String token) throws ChatServiceException {
+    public TokenDetails validateToken(String token) throws ChatServerException {
         TokenDetails details = tokenStore.get(token);
         
         if(details == null)
-            throw ChatServiceException.generateException(ExceptionData.INVALID_TOKEN, token);
+            throw new InvalidTokenException(token);
         
         if(details.getTimestamp() < System.currentTimeMillis())
-            throw ChatServiceException.generateException(ExceptionData.TOKEN_EXPIRED, token);
+            throw new TokenExpiredException(token);
         
         tokenStore.remove(token);
         return details;

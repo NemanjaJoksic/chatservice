@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
 import rs.ac.bg.etf.chatservice.chatmanager.token.TokenGenerator;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
+import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
 
 /**
  *
@@ -21,7 +21,7 @@ import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 public class UUIDTokenGenerator implements TokenGenerator {
 
     @Override
-    public Token generate(String userId, String channel) throws ChatServiceException {
+    public Token generate(String userId, String channel) throws GeneralException {
         String uuid = UUID.randomUUID().toString();
         int expiresIn = 300;
         return new Token(uuid, expiresIn);

@@ -5,8 +5,8 @@
  */
 package rs.ac.bg.etf.chatservice.security.provider;
 
+import rs.ac.bg.etf.chatservice.security.exception.AuthenticationException;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 
 /**
  *
@@ -14,6 +14,6 @@ import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
  */
 public interface AuthorizationProvider {
     
-    public Authentication authorize(Authentication authentication) throws ChatServiceException;
+    public Authentication authorize(Authentication authentication) throws AuthenticationException;
     
 }

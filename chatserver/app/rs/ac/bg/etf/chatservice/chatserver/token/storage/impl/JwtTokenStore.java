@@ -17,9 +17,10 @@ import rs.ac.bg.etf.chatservice.chatserver.Config;
 import rs.ac.bg.etf.chatservice.chatserver.token.storage.TokenStore;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.JWT_TOKEN_STORAGE;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.TOKEN_STORAGE_TYPE;
+import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
+import rs.ac.bg.etf.chatservice.chatserver.exception.InvalidTokenException;
+import rs.ac.bg.etf.chatservice.chatserver.exception.TokenExpiredException;
 import rs.ac.bg.etf.chatservice.chatserver.model.TokenDetails;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
-import rs.ac.bg.etf.chatservice.shared.exception.ExceptionData;
 
 /**
  *
@@ -38,7 +39,7 @@ public class JwtTokenStore implements TokenStore {
     }
 
     @Override
-    public TokenDetails get(String token) throws ChatServiceException {
+    public TokenDetails get(String token) throws ChatServerException {
         try {
             Jws<Claims> jwsClaims = Jwts.parser().setSigningKey(config.getJwtSigningKey()).parseClaimsJws(token);
             Claims claims = jwsClaims.getBody();
@@ -47,9 +48,9 @@ public class JwtTokenStore implements TokenStore {
             long timestamp = claims.getExpiration().getTime();
             return new TokenDetails(token, userId, channel, timestamp);
         } catch (ExpiredJwtException ex) { 
-            throw ChatServiceException.generateException(ExceptionData.TOKEN_EXPIRED, token);
+            throw new TokenExpiredException(token);
         } catch (Exception ex) {
-            throw ChatServiceException.generateException(ExceptionData.INVALID_TOKEN, token);
+            throw new InvalidTokenException(token);
         }
     }
 

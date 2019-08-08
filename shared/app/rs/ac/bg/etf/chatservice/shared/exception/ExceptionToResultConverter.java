@@ -20,8 +20,8 @@ public class ExceptionToResultConverter {
     
     public static Result convert(Throwable t) {
         logger.error(t.getMessage(), t);
-        if(t instanceof ChatServiceException) {
-            ChatServiceException ex = (ChatServiceException) t;
+        if(t instanceof GeneralException) {
+            GeneralException ex = (GeneralException) t;
             return Results.status(ex.getHttpStatus(), ex.getHttpMessage());
         } else {
             return Results.internalServerError(t.getMessage());

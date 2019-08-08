@@ -6,7 +6,7 @@
 package rs.ac.bg.etf.chatservice.chatmanager.dao;
 
 import rs.ac.bg.etf.chatservice.security.model.user.User;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
+import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
 
 /**
  *
@@ -14,8 +14,8 @@ import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
  */
 public interface UserDao {
     
-    public void createUser(User user) throws ChatServiceException;
+    public void createUser(User user) throws GeneralException;
     
-    public User getUser(String username) throws ChatServiceException;
+    public User getUser(String username) throws GeneralException;
     
 }

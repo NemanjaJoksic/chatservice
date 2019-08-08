@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.UserDao;
 import rs.ac.bg.etf.chatservice.security.model.authentication.SimpleAuthority;
 import rs.ac.bg.etf.chatservice.security.model.user.User;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
+import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
 import rs.ac.bg.etf.chatservice.shareddb.AbstractJdbcDao;
 
 /**
@@ -31,13 +31,13 @@ public class JdbcUserDao extends AbstractJdbcDao implements UserDao {
             + "WHERE u.USERNAME = ?";
     
     @Override
-    public void createUser(User user) throws ChatServiceException {
+    public void createUser(User user) throws GeneralException {
         user.getAuthorities().forEach(authority -> jdbcTemplate.update(INSERT_ROLES, user.getUsername(), authority.getAuthority()));
         jdbcTemplate.update(INSERT_USER, user.getUsername(), user.getPassword());
     }
 
     @Override
-    public User getUser(String username) throws ChatServiceException {
+    public User getUser(String username) throws GeneralException {
         AtomicBoolean found = new AtomicBoolean(false);
         User user = new User();
         jdbcTemplate.queryForList(GET_USER_BY_USERNAME, (int index, ResultSet rs) -> {

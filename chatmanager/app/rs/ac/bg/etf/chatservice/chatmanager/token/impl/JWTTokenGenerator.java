@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import rs.ac.bg.etf.chatservice.chatmanager.config.Config;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
 import rs.ac.bg.etf.chatservice.chatmanager.token.TokenGenerator;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
+import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
 
 /**
  *
@@ -39,7 +39,7 @@ public class JWTTokenGenerator implements TokenGenerator {
     }
     
     @Override
-    public Token generate(String userId, String channel) throws ChatServiceException {
+    public Token generate(String userId, String channel) throws GeneralException {
         
         Date currentDate = new Date();
         Date expiringDate = DateUtils.addSeconds(currentDate, config.getJwtExpiresIn());

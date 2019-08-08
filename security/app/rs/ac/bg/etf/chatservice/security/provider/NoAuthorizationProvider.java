@@ -6,9 +6,8 @@
 package rs.ac.bg.etf.chatservice.security.provider;
 
 import org.springframework.stereotype.Service;
+import rs.ac.bg.etf.chatservice.security.exception.AuthenticationException;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
-
 /**
  *
  * @author joksin
@@ -17,7 +16,7 @@ import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 public class NoAuthorizationProvider implements AuthorizationProvider {
 
     @Override
-    public Authentication authorize(Authentication authentication) throws ChatServiceException {
+    public Authentication authorize(Authentication authentication) throws AuthenticationException {
         return authentication;
     }
     

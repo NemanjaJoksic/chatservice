@@ -24,8 +24,8 @@ import rs.ac.bg.etf.chatservice.chatserver.Config;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.ACTOR_STORAGE_TYPE;
 import static rs.ac.bg.etf.chatservice.chatserver.Consts.REDIS_ACTOR_STORAGE;
 import rs.ac.bg.etf.chatservice.chatserver.actor.storage.MessageHandlerActorStorage;
+import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
 import rs.ac.bg.etf.chatservice.chatserver.executor.StorageExecutionContext;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 
 /**
  *
@@ -65,7 +65,7 @@ public class RedisMessageHandlerActorStorage implements MessageHandlerActorStora
                 jedis.hset(HASH_SET_NAME, id, actor);
                 logger.info("Actor [{}] with address [{}] are added to storage", id, actor);
             } catch (JedisConnectionException ex) {
-                throw ChatServiceException.generateException(ex);
+                throw new ChatServerException(ex);
             }
         }, executionContext);
     }
@@ -76,7 +76,7 @@ public class RedisMessageHandlerActorStorage implements MessageHandlerActorStora
             try (Jedis jedis = pool.getResource()) {
                 return Optional.ofNullable(jedis.hget(HASH_SET_NAME, id));
             } catch (JedisConnectionException ex) {
-                throw ChatServiceException.generateException(ex);
+                throw new ChatServerException(ex);
             }
         }, executionContext);
     }
@@ -88,7 +88,7 @@ public class RedisMessageHandlerActorStorage implements MessageHandlerActorStora
                 jedis.hdel(HASH_SET_NAME, id);
                 logger.info("Actor [{}] are removed from storage", id);
             } catch (JedisConnectionException ex) {
-                throw ChatServiceException.generateException(ex);
+                throw new ChatServerException(ex);
             }
         }, executionContext);
     }

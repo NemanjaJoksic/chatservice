@@ -7,8 +7,8 @@ package rs.ac.bg.etf.chatservice.security.provider;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import rs.ac.bg.etf.chatservice.security.exception.AuthenticationException;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
 
 /**
  *
@@ -20,7 +20,7 @@ public class AuthorizationProviderManager {
     @Autowired
     private AuthorizationProvider authorizationProvider;
     
-    public Authentication authorize(Authentication authentication) throws ChatServiceException {
+    public Authentication authorize(Authentication authentication) throws AuthenticationException {
         return authorizationProvider.authorize(authentication);
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rs.ac.bg.etf.chatservice.chatmanager.dao;
+package rs.ac.bg.etf.chatservice.shareddb.exception;
 
 import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
 
@@ -11,10 +11,10 @@ import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
  *
  * @author joksin
  */
-public interface ChatDao {
+public class DbException extends GeneralException {
     
-    public String getChannelIdByUserId(String userId) throws GeneralException;
-    
-    public void createPersonalChat(String userId, String channelId) throws GeneralException;
+    public DbException(Throwable t) {
+        super(t);
+    }
     
 }

@@ -7,7 +7,7 @@ package rs.ac.bg.etf.chatservice.chatserver.actor.storage;
 
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
-import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
+import rs.ac.bg.etf.chatservice.chatserver.exception.ChatServerException;
 
 /**
  *
@@ -15,10 +15,10 @@ import rs.ac.bg.etf.chatservice.shared.exception.ChatServiceException;
  */
 public interface MessageHandlerActorStorage {
     
-    public CompletionStage<Void> put(String id, String actor) throws ChatServiceException;
+    public CompletionStage<Void> put(String id, String actor) throws ChatServerException;
     
-    public CompletionStage<Optional<String>> get(String id) throws ChatServiceException;
+    public CompletionStage<Optional<String>> get(String id) throws ChatServerException;
     
-    public CompletionStage<Void> remove(String id) throws ChatServiceException;
+    public CompletionStage<Void> remove(String id) throws ChatServerException;
     
 }
