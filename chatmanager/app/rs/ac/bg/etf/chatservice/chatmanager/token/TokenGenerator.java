@@ -6,7 +6,7 @@
 package rs.ac.bg.etf.chatservice.chatmanager.token;
 
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
-import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
+import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
 
 /**
  *

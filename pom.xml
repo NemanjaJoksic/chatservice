@@ -21,11 +21,11 @@
     </properties>
 
     <modules>
+        <module>commons</module>
+        <module>data</module>
+        <module>security</module>
         <module>chatserver</module>
         <module>chatmanager</module>
-        <module>security</module>
-        <module>shared</module>
-        <module>shareddb</module>
     </modules>
 
     <dependencies>

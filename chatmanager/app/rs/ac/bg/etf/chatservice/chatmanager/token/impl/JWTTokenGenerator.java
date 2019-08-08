@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import rs.ac.bg.etf.chatservice.chatmanager.config.Config;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
 import rs.ac.bg.etf.chatservice.chatmanager.token.TokenGenerator;
-import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
+import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
 
 /**
  *

@@ -9,10 +9,10 @@ import java.sql.ResultSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.springframework.stereotype.Repository;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.UserDao;
+import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
+import rs.ac.bg.etf.chatservice.data.jdbc.AbstractJdbcDao;
 import rs.ac.bg.etf.chatservice.security.model.authentication.SimpleAuthority;
 import rs.ac.bg.etf.chatservice.security.model.user.User;
-import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
-import rs.ac.bg.etf.chatservice.shareddb.AbstractJdbcDao;
 
 /**
  *

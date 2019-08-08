@@ -7,9 +7,9 @@ package rs.ac.bg.etf.chatservice.chatmanager.dao.jdbc;
 
 import java.sql.ResultSet;
 import org.springframework.stereotype.Repository;
-import rs.ac.bg.etf.chatservice.shareddb.AbstractJdbcDao;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.ChatDao;
-import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
+import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
+import rs.ac.bg.etf.chatservice.data.jdbc.AbstractJdbcDao;
 
 /**
  *

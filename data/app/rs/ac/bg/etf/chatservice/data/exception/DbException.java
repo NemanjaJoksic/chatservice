@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rs.ac.bg.etf.chatservice.shareddb.exception;
+package rs.ac.bg.etf.chatservice.data.exception;
 
-import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
+import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
 
 /**
  *

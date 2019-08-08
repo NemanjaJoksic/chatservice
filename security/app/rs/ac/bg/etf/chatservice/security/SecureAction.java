@@ -12,11 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import play.mvc.Http;
 import play.mvc.Result;
+import rs.ac.bg.etf.chatservice.commons.exception.ExceptionToResultConverter;
 import rs.ac.bg.etf.chatservice.security.context.SecurityContext;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
 import rs.ac.bg.etf.chatservice.security.provider.AuthenticationProviderManager;
 import rs.ac.bg.etf.chatservice.security.provider.AuthorizationProviderManager;
-import rs.ac.bg.etf.chatservice.shared.exception.ExceptionToResultConverter;
 
 /**
  *

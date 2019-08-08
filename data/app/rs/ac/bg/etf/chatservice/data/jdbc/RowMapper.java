@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rs.ac.bg.etf.chatservice.shareddb;
+package rs.ac.bg.etf.chatservice.data.jdbc;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
  * @author joksin
  */
-public abstract class AbstractJdbcDao {
+public interface RowMapper<T> {
     
-    @Autowired
-    protected JdbcTemplate jdbcTemplate;
+    public T mapRow(int index, ResultSet rs) throws SQLException;
     
 }

@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!--<groupId>rs.ac.bg.etf.chatservice</groupId>-->
-    <artifactId>shareddb</artifactId>
+    <artifactId>commons</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     
@@ -13,16 +13,9 @@
         <relativePath>..</relativePath>
     </parent>
     
-    <name>shareddb</name>
+    <name>commons</name>
 
     <dependencies>
-        
-        <dependency>
-            <groupId>rs.ac.bg.etf</groupId>
-            <artifactId>shared</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
@@ -33,18 +26,6 @@
             <groupId>com.typesafe.play</groupId>
             <artifactId>play_${scala.play.version}</artifactId>
             <version>${play2.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.typesafe.play</groupId>
-            <artifactId>play-java-jdbc_${scala.play.version}</artifactId>
-            <version>${play2.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.199</version>
         </dependency>
 
         <!-- default SLF4J logging implementation, can be replaced by other -->

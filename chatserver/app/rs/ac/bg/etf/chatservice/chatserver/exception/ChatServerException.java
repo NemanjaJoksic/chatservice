@@ -5,7 +5,7 @@
  */
 package rs.ac.bg.etf.chatservice.chatserver.exception;
 
-import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
+import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
 
 /**
  *

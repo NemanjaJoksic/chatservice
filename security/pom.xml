@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>rs.ac.bg.etf</groupId>
-            <artifactId>shared</artifactId>
+            <artifactId>commons</artifactId>
             <version>${project.version}</version>
         </dependency>
         

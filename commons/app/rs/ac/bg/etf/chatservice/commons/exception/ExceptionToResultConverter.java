@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rs.ac.bg.etf.chatservice.shared.exception;
+package rs.ac.bg.etf.chatservice.commons.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rs.ac.bg.etf.chatservice.shareddb;
+package rs.ac.bg.etf.chatservice.data.jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +15,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import play.api.db.Database;
-import rs.ac.bg.etf.chatservice.shareddb.exception.DbException;
+import rs.ac.bg.etf.chatservice.data.exception.DbException;
 
 /**
  *

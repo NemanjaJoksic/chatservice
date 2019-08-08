@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.io.IOUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Repository;
-import rs.ac.bg.etf.chatservice.shareddb.AbstractJdbcDao;
+import rs.ac.bg.etf.chatservice.data.jdbc.AbstractJdbcDao;
 
 /**
  *

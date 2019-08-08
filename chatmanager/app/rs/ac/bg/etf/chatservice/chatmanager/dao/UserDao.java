@@ -6,7 +6,7 @@
 package rs.ac.bg.etf.chatservice.chatmanager.dao;
 
 import rs.ac.bg.etf.chatservice.security.model.user.User;
-import rs.ac.bg.etf.chatservice.shared.exception.GeneralException;
+import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
 
 /**
  *
