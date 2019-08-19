@@ -17,16 +17,16 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 public class Config {
     
-    @Value("${app.chatserver.url}")
+    @Value("${chatmanager.chatserver.url}")
     private String chatServerUrl;
     
-    @Value("${app.token-generator.jwt.algorithm}")
+    @Value("${chatmanager.token-generator.jwt.algorithm}")
     private String jwtSignitureAlgorithm;
     
-    @Value("${app.token-generator.jwt.signing-key}")
+    @Value("${chatmanager.token-generator.jwt.signing-key}")
     private String jwtSigningKey;
         
-    @Value("${app.token-generator.jwt.expires-in}")
+    @Value("${chatmanager.token-generator.jwt.expires-in}")
     private int jwtExpiresIn;
     
 }

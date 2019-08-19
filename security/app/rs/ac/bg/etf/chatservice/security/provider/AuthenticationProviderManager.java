@@ -30,13 +30,13 @@ public class AuthenticationProviderManager {
         }
 
         Authentication authentication = null;
-        SecurityException lastException = null;
+        AuthenticationException lastException = null;
         for (AuthenticationProvider authenticationProvider : authenticationProviders) {
             try {
                 authentication = authenticationProvider.authenticate(optionalAuthrozationHeader);
                 if(authentication != null)
                     break;
-            } catch (SecurityException ex) {
+            } catch (AuthenticationException ex) {
                 lastException = ex;
             }
         }

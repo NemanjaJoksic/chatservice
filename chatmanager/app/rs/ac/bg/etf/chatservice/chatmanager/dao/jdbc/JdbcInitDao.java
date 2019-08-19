@@ -18,7 +18,7 @@ import rs.ac.bg.etf.chatservice.data.jdbc.AbstractJdbcDao;
  * @author joksin
  */
 @Repository
-@ConditionalOnExpression("${app.db.init.enabled}")
+@ConditionalOnExpression("${chatmanager.db.init.enabled}")
 public class JdbcInitDao extends AbstractJdbcDao {
     
     @PostConstruct

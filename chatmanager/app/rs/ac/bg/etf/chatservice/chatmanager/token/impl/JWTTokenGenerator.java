@@ -25,7 +25,7 @@ import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
  * @author joksin
  */
 @Component
-@ConditionalOnProperty(name = "app.token-generator.type", havingValue = "jwt")
+@ConditionalOnProperty(name = "chatmanager.token-generator.type", havingValue = "jwt")
 public class JWTTokenGenerator implements TokenGenerator {
 
     @Autowired

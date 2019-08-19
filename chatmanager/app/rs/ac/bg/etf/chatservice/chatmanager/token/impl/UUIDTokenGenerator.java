@@ -17,7 +17,7 @@ import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
  * @author joksin
  */
 @Component
-@ConditionalOnProperty(name = "app.token-generator.type", havingValue = "uuid")
+@ConditionalOnProperty(name = "chatmanager.token-generator.type", havingValue = "uuid")
 public class UUIDTokenGenerator implements TokenGenerator {
 
     @Override
