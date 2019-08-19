@@ -42,7 +42,7 @@ public class JWTTokenGenerator implements TokenGenerator {
     public Token generate(String userId, String channel) throws GeneralException {
         
         Date currentDate = new Date();
-        Date expiringDate = DateUtils.addSeconds(currentDate, config.getJwtExpiresIn());
+        Date expiringDate = DateUtils.addSeconds(currentDate, config.getJwtExpiresIn() * 1000);
         
         JwtBuilder builder = Jwts.builder()
                 .setSubject(userId)
