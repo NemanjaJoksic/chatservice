@@ -8,17 +8,14 @@ package rs.ac.bg.etf.chatservice.security.provider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
-import java.io.IOException;
 import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.security.PublicKey;
-import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
 import rs.ac.bg.etf.chatservice.security.exception.AuthenticationException;
 import rs.ac.bg.etf.chatservice.security.exception.InvalidTokenException;
@@ -32,6 +29,7 @@ import rs.ac.bg.etf.chatservice.security.model.user.UserDetails;
  * @author joksin
  */
 @Service
+@ConditionalOnExpression("${security.authentication.acolyte.enabled}")
 public class AcolyteTokenAuthenticationProvider extends TokenAuthenticationProvider {
 
     private static final String PUBLIC_KEY

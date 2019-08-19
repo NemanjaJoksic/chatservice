@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.stereotype.Service;
 import play.mvc.Http;
 import rs.ac.bg.etf.chatservice.security.crypto.PasswordEncoder;
@@ -26,6 +27,7 @@ import rs.ac.bg.etf.chatservice.security.service.UserDetailsService;
  * @author joksin
  */
 @Service
+@ConditionalOnExpression("${security.authentication.basic.enabled}")
 public class BasicAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
