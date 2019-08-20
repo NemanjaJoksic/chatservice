@@ -5,21 +5,22 @@
  */
 package rs.ac.bg.etf.chatservice.loadtest.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.protobuf.InvalidProtocolBufferException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import rs.ac.bg.etf.chatservice.loadtest.model.ProtobufMessages;
 
 /**
  *
  * @author joksin
  */
-public class DataWebSocketHandler extends TextWebSocketHandler {
+public class ProtobufWebSocketHandler extends TextWebSocketHandler {
 
-    private final ObjectMapper mapper = new ObjectMapper();
-    
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         System.out.println("Opened new session in instance " + this);
@@ -29,13 +30,19 @@ public class DataWebSocketHandler extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage message)
             throws Exception {
         byte[] bytes = message.getPayload().getBytes();
-        System.out.println(new String(bytes));
+        ProtobufMessages.ChatMessage chatMessage = ProtobufMessages.ChatMessage.parseFrom(bytes);
+        System.out.println(chatMessage.getSender() + "," + chatMessage.getReceiver() + "," + chatMessage.getMessage());
     }
-    
+
     @Override
     public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
-        byte[] bytes = message.getPayload().array();
-        System.out.println(new String(bytes));
+        try {
+            byte[] bytes = message.getPayload().array();
+            ProtobufMessages.ChatMessage chatMessage = ProtobufMessages.ChatMessage.parseFrom(bytes);
+            System.out.println(chatMessage.getSender() + "," + chatMessage.getReceiver() + "," + chatMessage.getMessage());
+        } catch (InvalidProtocolBufferException ex) {
+            Logger.getLogger(ProtobufWebSocketHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

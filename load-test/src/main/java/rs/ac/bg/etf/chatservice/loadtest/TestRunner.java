@@ -46,13 +46,13 @@ public class TestRunner implements CommandLineRunner {
             ChatClient.clients[i] = "CHANNEL_ID_" + i;
         }
         
-        System.out.println("chatServers: " + config.getChatServerUrls());
-        int i = 0;
-        String chatServerUrl = config.getChatServerUrls()[0];
+        String[] chatServerUrls = config.getChatServerUrls();
+        int i = 0, currentUrlIndex = 0, urlsNum = chatServerUrls.length;
         Random random = new Random();
         for(String token : getTokens()) {
-            TextJsonChatClient chatClient = beanFactory.getBean(TextJsonChatClient.class, chatServerUrl, token);
+            ChatClient chatClient = beanFactory.getBean(TextJsonChatClient.class, chatServerUrls[currentUrlIndex], token);
             taskScheduler.scheduleAtFixedRate(chatClient, Duration.ofSeconds(random.nextInt(3) + 3));
+            currentUrlIndex = (currentUrlIndex + 1) % urlsNum;
             if(i++ == numberOfTextJsonClients)
                 break;
         }
