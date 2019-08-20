@@ -54,7 +54,7 @@ public class ChatService {
     public CompletionStage<List<Chat>> getAllChats() {
         return CompletableFuture.supplyAsync(() -> {
             return chatDao.getAllChats();
-        });
+        }, executionContext);
     }
     
     public CompletionStage<Connect> connect(String userId, String dataType, String messageType) {
