@@ -20,6 +20,7 @@ import rs.ac.bg.etf.chatservice.chatmanager.model.Connect;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
 import rs.ac.bg.etf.chatservice.chatmanager.token.TokenGenerator;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.ChatDao;
+import rs.ac.bg.etf.chatservice.chatmanager.model.Chat;
 
 /**
  *
@@ -52,16 +53,17 @@ public class ChatService {
     public CompletionStage<Connect> connect(String userId, String dataType, String messageType) {
         return CompletableFuture.supplyAsync(() -> {
             
-            String channel = chatDao.getChannelIdByUserId(userId);
-            if(channel == null) {
-                channel = UUID.randomUUID().toString();
-                chatDao.createPersonalChat(userId, channel);
-                logger.info("New channel created [user_id -> {}, channel_id -> {}]", userId, channel);
+            Chat chat = chatDao.getChatByUserId(userId);
+            if(chat == null) {
+                String channelId = UUID.randomUUID().toString();
+                chat = new Chat(userId, channelId, userId, "PERSONAL");
+                chatDao.createChat(chat);
+                logger.info("New channel created [user_id -> {}, channel_id -> {}]", userId, channelId);
             }
             
-            Token token = tokenGenerator.generate(userId, channel);
+            Token token = tokenGenerator.generate(userId, chat);
             logger.info("Token generated {}", token.getValue());
-            logger.info("User connected [user_id -> {}, channel_id -> {}]", userId, channel);
+            logger.info("User connected [user_id -> {}, channel_id -> {}]", userId, chat.getChannelId());
             
             String chatServerUrl = generateChatServerUrl(token.getValue(), dataType, messageType);
             Connect connect = new Connect();

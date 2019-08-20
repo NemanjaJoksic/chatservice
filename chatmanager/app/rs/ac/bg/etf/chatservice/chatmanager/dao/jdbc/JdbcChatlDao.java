@@ -8,6 +8,8 @@ package rs.ac.bg.etf.chatservice.chatmanager.dao.jdbc;
 import java.sql.ResultSet;
 import org.springframework.stereotype.Repository;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.ChatDao;
+import rs.ac.bg.etf.chatservice.chatmanager.dao.jdbc.mapper.ChatMapper;
+import rs.ac.bg.etf.chatservice.chatmanager.model.Chat;
 import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
 import rs.ac.bg.etf.chatservice.data.jdbc.AbstractJdbcDao;
 
@@ -18,18 +20,19 @@ import rs.ac.bg.etf.chatservice.data.jdbc.AbstractJdbcDao;
 @Repository
 public class JdbcChatlDao extends AbstractJdbcDao implements ChatDao {
     
-    private static final String GET_CHANNEL_ID_BY_USER_ID = "SELECT * FROM PERSONAL_CHAT WHERE USER_ID = ?";
+    private static final String GET_CHANNEL_ID_BY_USER_ID = "SELECT * FROM CHAT WHERE CHAT_ID = ?";
     
-    private static final String INSERT_PERSONAL_CHAT = "INSERT INTO PERSONAL_CHAT(USER_ID,CHANNEL_ID) VALUES(?,?)";
+    private static final String INSERT_PERSONAL_CHAT = "INSERT INTO CHAT(CHAT_ID,CHANNEL_ID,CHANNEL_NAME,CHANNEL_TYPE) VALUES(?,?,?,?)";
 
     @Override
-    public String getChannelIdByUserId(String userId) throws GeneralException {
-        return jdbcTemplate.queryForObject(GET_CHANNEL_ID_BY_USER_ID, (int index, ResultSet rs) -> rs.getString("CHANNEL_ID"), userId);
+    public Chat getChatByUserId(String userId) throws GeneralException {
+        return jdbcTemplate.queryForObject(GET_CHANNEL_ID_BY_USER_ID, new ChatMapper(), userId);
     }
 
     @Override
-    public void createPersonalChat(String userId, String channelId) throws GeneralException {
-        jdbcTemplate.update(INSERT_PERSONAL_CHAT, userId, channelId);
+    public void createChat(Chat chat) throws GeneralException {
+        jdbcTemplate.update(INSERT_PERSONAL_CHAT, chat.getChatId(), chat.getChannelId(), 
+                chat.getChannelName(), chat.getChannelType());
     }
     
 }

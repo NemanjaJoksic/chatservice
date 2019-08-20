@@ -44,7 +44,7 @@ public class JwtTokenStore implements TokenStore {
             Jws<Claims> jwsClaims = Jwts.parser().setSigningKey(config.getJwtSigningKey()).parseClaimsJws(token);
             Claims claims = jwsClaims.getBody();
             String userId = claims.getSubject();
-            String channel = claims.get("channel", String.class);
+            String channel = claims.get("channelId", String.class);
             long timestamp = claims.getExpiration().getTime();
             return new TokenDetails(token, userId, channel, timestamp);
         } catch (ExpiredJwtException ex) { 

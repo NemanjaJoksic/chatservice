@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.etf.chatservice.chatmanager.token;
 
+import rs.ac.bg.etf.chatservice.chatmanager.model.Chat;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
 import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
 
@@ -14,6 +15,6 @@ import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
  */
 public interface TokenGenerator {
     
-    public Token generate(String userId, String channel) throws GeneralException;
+    public Token generate(String userId, Chat chat) throws GeneralException;
     
 }

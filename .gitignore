@@ -1,2 +1,6 @@
 /target/
 /logs/
+token.txt
+token2.txt
+public.pem
+/chatmanager/db/*

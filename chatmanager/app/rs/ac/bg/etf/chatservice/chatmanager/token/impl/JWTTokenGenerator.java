@@ -8,7 +8,6 @@ package rs.ac.bg.etf.chatservice.chatmanager.token.impl;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import java.time.Instant;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import org.apache.commons.lang3.time.DateUtils;
@@ -16,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import rs.ac.bg.etf.chatservice.chatmanager.config.Config;
+import rs.ac.bg.etf.chatservice.chatmanager.model.Chat;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
 import rs.ac.bg.etf.chatservice.chatmanager.token.TokenGenerator;
 import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
@@ -39,17 +39,19 @@ public class JWTTokenGenerator implements TokenGenerator {
     }
     
     @Override
-    public Token generate(String userId, String channel) throws GeneralException {
+    public Token generate(String userId, Chat chat) throws GeneralException {
         
         Date currentDate = new Date();
-        Date expiringDate = DateUtils.addSeconds(currentDate, config.getJwtExpiresIn() * 1000);
+        Date expiringDate = DateUtils.addSeconds(currentDate, config.getJwtExpiresIn());
         
         JwtBuilder builder = Jwts.builder()
                 .setSubject(userId)
                 .setIssuer("CHAT_MANAGER")
                 .setIssuedAt(currentDate)
                 .setExpiration(expiringDate)
-                .claim("channel", channel)
+                .claim("channelId", chat.getChannelId())
+                .claim("channelName", chat.getChannelName())
+                .claim("channelType", chat.getChannelType())
                 .signWith(signitureAlgorithm, config.getJwtSigningKey());
         
         String value = builder.compact();

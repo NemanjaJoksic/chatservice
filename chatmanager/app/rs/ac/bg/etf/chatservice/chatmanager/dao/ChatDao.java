@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.etf.chatservice.chatmanager.dao;
 
+import rs.ac.bg.etf.chatservice.chatmanager.model.Chat;
 import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
 
 /**
@@ -13,8 +14,8 @@ import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
  */
 public interface ChatDao {
     
-    public String getChannelIdByUserId(String userId) throws GeneralException;
+    public Chat getChatByUserId(String userId) throws GeneralException;
     
-    public void createPersonalChat(String userId, String channelId) throws GeneralException;
+    public void createChat(Chat chat) throws GeneralException;
     
 }
