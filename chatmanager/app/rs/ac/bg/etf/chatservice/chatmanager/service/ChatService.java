@@ -6,6 +6,7 @@
 package rs.ac.bg.etf.chatservice.chatmanager.service;
 
 import akka.actor.ActorSystem;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -48,6 +49,12 @@ public class ChatService {
     @PostConstruct
     public void init() {
         executionContext = new ServiceExecutionContext(actorSystem);
+    }
+    
+    public CompletionStage<List<Chat>> getAllChats() {
+        return CompletableFuture.supplyAsync(() -> {
+            return chatDao.getAllChats();
+        });
     }
     
     public CompletionStage<Connect> connect(String userId, String dataType, String messageType) {

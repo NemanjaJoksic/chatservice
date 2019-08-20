@@ -1,4 +1,5 @@
 # Routes
 
-POST    /chat/connect           rs.ac.bg.etf.chatservice.chatmanager.controller.ChatController.connect(dataType: String, messageType: String)
+GET     /chats                  rs.ac.bg.etf.chatservice.chatmanager.controller.ChatController.getAllChats()
+POST    /chats/connect          rs.ac.bg.etf.chatservice.chatmanager.controller.ChatController.connect(dataType: String, messageType: String)
 POST    /users/register         rs.ac.bg.etf.chatservice.chatmanager.controller.UserController.register()

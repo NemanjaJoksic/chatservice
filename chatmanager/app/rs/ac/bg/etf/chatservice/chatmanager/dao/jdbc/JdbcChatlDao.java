@@ -6,6 +6,7 @@
 package rs.ac.bg.etf.chatservice.chatmanager.dao.jdbc;
 
 import java.sql.ResultSet;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.ChatDao;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.jdbc.mapper.ChatMapper;
@@ -20,13 +21,20 @@ import rs.ac.bg.etf.chatservice.data.jdbc.AbstractJdbcDao;
 @Repository
 public class JdbcChatlDao extends AbstractJdbcDao implements ChatDao {
     
-    private static final String GET_CHANNEL_ID_BY_USER_ID = "SELECT * FROM CHAT WHERE CHAT_ID = ?";
+    private static final String GET_ALL_CHATS = "SELECT * FROM CHAT";
+    
+    private static final String GET_CHAT_BY_USER_ID = "SELECT * FROM CHAT WHERE CHAT_ID = ?";
     
     private static final String INSERT_PERSONAL_CHAT = "INSERT INTO CHAT(CHAT_ID,CHANNEL_ID,CHANNEL_NAME,CHANNEL_TYPE) VALUES(?,?,?,?)";
 
     @Override
+    public List<Chat> getAllChats() throws GeneralException {
+        return jdbcTemplate.queryForList(GET_ALL_CHATS, new ChatMapper());
+    }
+    
+    @Override
     public Chat getChatByUserId(String userId) throws GeneralException {
-        return jdbcTemplate.queryForObject(GET_CHANNEL_ID_BY_USER_ID, new ChatMapper(), userId);
+        return jdbcTemplate.queryForObject(GET_CHAT_BY_USER_ID, new ChatMapper(), userId);
     }
 
     @Override
@@ -34,5 +42,5 @@ public class JdbcChatlDao extends AbstractJdbcDao implements ChatDao {
         jdbcTemplate.update(INSERT_PERSONAL_CHAT, chat.getChatId(), chat.getChannelId(), 
                 chat.getChannelName(), chat.getChannelType());
     }
-    
+
 }

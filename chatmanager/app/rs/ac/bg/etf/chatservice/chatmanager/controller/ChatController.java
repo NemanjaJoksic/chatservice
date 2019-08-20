@@ -25,6 +25,14 @@ public class ChatController extends SecureController {
     @Autowired
     private ChatService chatService;
 
+    public CompletionStage<Result> getAllChats() {
+        return chatService
+                .getAllChats()
+                .thenApplyAsync(chats -> {
+                    return Results.ok(Json.toJson(chats));
+                });
+    }
+    
     public CompletionStage<Result> connect(String dataType, String messageType) {
         String principal = SecurityContext.current().getAuthentication().getPrincipal();
         return chatService

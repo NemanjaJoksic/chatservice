@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.etf.chatservice.chatmanager.dao;
 
+import java.util.List;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Chat;
 import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
 
@@ -13,6 +14,8 @@ import rs.ac.bg.etf.chatservice.commons.exception.GeneralException;
  * @author joksin
  */
 public interface ChatDao {
+    
+    public List<Chat> getAllChats() throws GeneralException;
     
     public Chat getChatByUserId(String userId) throws GeneralException;
     
