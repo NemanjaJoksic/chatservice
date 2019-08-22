@@ -7,6 +7,7 @@ package rs.ac.bg.etf.chatservice.chatserver.actor.storage.impl;
 
 import akka.actor.ActorSystem;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import static java.util.concurrent.CompletableFuture.runAsync;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 import java.util.concurrent.CompletionStage;
@@ -59,7 +60,7 @@ public class RedisMessageHandlerActorStorage implements MessageHandlerActorStora
     }
 
     @Override
-    public CompletionStage<Void> put(String id, String actor) {
+    public CompletableFuture<Void> put(String id, String actor) {
         return runAsync(() -> {
             try (Jedis jedis = pool.getResource()) {
                 jedis.hset(HASH_SET_NAME, id, actor);
@@ -71,7 +72,7 @@ public class RedisMessageHandlerActorStorage implements MessageHandlerActorStora
     }
 
     @Override
-    public CompletionStage<Optional<String>> get(String id) {
+    public CompletableFuture<Optional<String>> get(String id) {
         return supplyAsync(() -> {
             try (Jedis jedis = pool.getResource()) {
                 return Optional.ofNullable(jedis.hget(HASH_SET_NAME, id));
@@ -82,7 +83,7 @@ public class RedisMessageHandlerActorStorage implements MessageHandlerActorStora
     }
 
     @Override
-    public CompletionStage<Void> remove(String id) {
+    public CompletableFuture<Void> remove(String id) {
         return runAsync(() -> {
             try (Jedis jedis = pool.getResource()) {
                 jedis.hdel(HASH_SET_NAME, id);

@@ -13,6 +13,7 @@ import akka.cluster.pubsub.DistributedPubSub;
 import akka.cluster.pubsub.DistributedPubSubMediator;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import static java.util.concurrent.CompletableFuture.runAsync;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 import java.util.concurrent.CompletionStage;
@@ -126,21 +127,21 @@ public class InMemoryMessageHandlerActorStorage implements MessageHandlerActorSt
     }
 
     @Override
-    public CompletionStage<Void> put(String id, String actor) {
+    public CompletableFuture<Void> put(String id, String actor) {
         return runAsync(() -> {
              notificationService.actorStarted(id, actor);
         }, executionContext);
     }
 
     @Override
-    public CompletionStage<Optional<String>> get(String id) {
+    public CompletableFuture<Optional<String>> get(String id) {
         return supplyAsync(() -> {
             return Optional.ofNullable(map.get(id));
         }, executionContext);
     }
 
     @Override
-    public CompletionStage<Void> remove(String id) {
+    public CompletableFuture<Void> remove(String id) {
         return runAsync(() -> {
             notificationService.actorStopped(id);
         }, executionContext);
