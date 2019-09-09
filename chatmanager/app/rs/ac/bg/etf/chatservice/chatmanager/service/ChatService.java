@@ -22,6 +22,7 @@ import rs.ac.bg.etf.chatservice.chatmanager.model.Token;
 import rs.ac.bg.etf.chatservice.chatmanager.token.TokenGenerator;
 import rs.ac.bg.etf.chatservice.chatmanager.dao.ChatDao;
 import rs.ac.bg.etf.chatservice.chatmanager.model.Chat;
+import rs.ac.bg.etf.chatservice.chatmanager.service.util.Strategy;
 
 /**
  *
@@ -43,6 +44,9 @@ public class ChatService {
 
     @Autowired
     private ChatDao chatDao;
+    
+    @Autowired
+    private Strategy strategy;
     
     private ServiceExecutionContext executionContext;
     
@@ -85,7 +89,7 @@ public class ChatService {
 
     private String generateChatServerUrl(String token, String dataType, String messageType) {
         StringBuilder sb = new StringBuilder();
-        sb.append(config.getChatServerUrl().replaceAll("\"", ""))
+        sb.append(strategy.getChatServerUrl().replaceAll("\"", ""))
                 .append("/").append(dataType)
                 .append("/").append(messageType)
                 .append("/").append(token);

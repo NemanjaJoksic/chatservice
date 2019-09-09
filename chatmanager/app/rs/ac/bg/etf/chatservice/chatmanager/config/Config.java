@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
     
     @Value("${chatmanager.chatserver.url}")
-    private String chatServerUrl;
+    private String[] chatServerUrls;
     
     @Value("${chatmanager.token-generator.jwt.algorithm}")
     private String jwtSignitureAlgorithm;
