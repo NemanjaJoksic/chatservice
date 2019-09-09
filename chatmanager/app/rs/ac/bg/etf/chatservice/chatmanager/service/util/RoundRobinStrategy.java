@@ -5,6 +5,8 @@
  */
 package rs.ac.bg.etf.chatservice.chatmanager.service.util;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,20 +22,19 @@ public class RoundRobinStrategy implements Strategy {
     @Autowired
     private Config config;
     
-    private int next;
+    private AtomicInteger next;
     private String[] urls;
     
     @PostConstruct
     public void init() {
-        this.next = 0;
+        this.next = new AtomicInteger();
         this.urls = config.getChatServerUrls();
     }
     
     @Override
-    public synchronized String getChatServerUrl() {
-        String url = urls[next];
-        next = (next + 1) % urls.length;
-        return url;
+    public String getChatServerUrl() {
+        int index = next.incrementAndGet() % urls.length;
+        return urls[index];
     }
     
 }

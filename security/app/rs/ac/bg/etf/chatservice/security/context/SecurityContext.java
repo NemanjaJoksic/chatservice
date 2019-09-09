@@ -5,6 +5,7 @@
  */
 package rs.ac.bg.etf.chatservice.security.context;
 
+import java.util.concurrent.atomic.AtomicLong;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
@@ -18,7 +19,7 @@ import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
 public class SecurityContext {
     
     private static final ThreadLocal<SecurityContext> securityContextHolder = new ThreadLocal<>();
-    private static int NEXT_ID = 1;
+    private static AtomicLong NEXT_ID = new AtomicLong();
     
     public static SecurityContext current() {
         SecurityContext securityContext = securityContextHolder.get();
@@ -29,11 +30,11 @@ public class SecurityContext {
     }
     
     public static void setAuthentication(Authentication authentication) {
-        int id = NEXT_ID++;
+        long id = NEXT_ID.incrementAndGet();
         securityContextHolder.set(new SecurityContext(id, authentication));
     }
     
-    private int id;
+    private long id;
     private Authentication authentication;
             
 }
