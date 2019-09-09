@@ -1,0 +1,14 @@
+[
+    {
+        "path" : "/chats**",
+        "method" : "POST",
+        "roles" : ["USER_ROLE"]
+    },
+    {
+        "path" : "/users",
+        "method" : "GET",
+        "roles" : ["USER_ROLE"]
+    }
+]
+
+

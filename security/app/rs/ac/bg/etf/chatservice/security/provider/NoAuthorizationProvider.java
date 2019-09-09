@@ -12,7 +12,7 @@ import rs.ac.bg.etf.chatservice.security.model.authentication.Authentication;
  *
  * @author joksin
  */
-@Service
+//@Service
 public class NoAuthorizationProvider implements AuthorizationProvider {
 
     @Override
