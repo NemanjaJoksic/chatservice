@@ -18,8 +18,11 @@
         <encoder>
             <pattern>%date{HH:mm:ss} [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
-    </appender>    
-    <root level="INFO">
+    </appender>  
+    
+    <logger name="rs.ac.bg.etf.chatservice" level="INFO" />
+        
+    <root level="WARN">
         <appender-ref ref="FILE" />
         <appender-ref ref="STDOUT" />
     </root>
